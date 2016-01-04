@@ -1,7 +1,8 @@
+# frozen_string_literal: false
 #
 #   sync.rb - 2 phase lock with counter
 #       $Release Version: 1.0$
-#       $Revision: 40825 $
+#       $Revision: 53141 $
 #       by Keiju ISHITSUKA(keiju@ishitsuka.com)
 #
 # --

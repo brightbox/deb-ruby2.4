@@ -1,4 +1,5 @@
-# $Id: fileasserts.rb 44387 2013-12-24 14:20:47Z nobu $
+# frozen_string_literal: false
+# $Id: fileasserts.rb 53141 2015-12-16 05:07:31Z naruse $
 
 module Test
   module Unit

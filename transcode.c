@@ -2,7 +2,7 @@
 
   transcode.c -
 
-  $Author: nagachika $
+  $Author: nobu $
   created at: Tue Oct 30 16:10:22 JST 2007
 
   Copyright (C) 2007 Martin Duerst
@@ -154,7 +154,7 @@ struct rb_econv_t {
 typedef struct {
     const char *sname;
     const char *dname;
-    const char *lib; /* null means means no need to load a library */
+    const char *lib; /* null means no need to load a library */
     const rb_transcoder *transcoder;
 } transcoder_entry_t;
 
@@ -1854,6 +1854,7 @@ rb_econv_substr_append(rb_econv_t *ec, VALUE src, long off, long len, VALUE dst,
     src = rb_str_new_frozen(src);
     dst = rb_econv_append(ec, RSTRING_PTR(src) + off, len, dst, flags);
     RB_GC_GUARD(src);
+    OBJ_INFECT_RAW(dst, src);
     return dst;
 }
 
@@ -2912,7 +2913,7 @@ econv_free(void *ptr)
 static size_t
 econv_memsize(const void *ptr)
 {
-    return ptr ? sizeof(rb_econv_t) : 0;
+    return sizeof(rb_econv_t);
 }
 
 static const rb_data_type_t econv_data_type = {
@@ -3768,8 +3769,10 @@ econv_primitive_convert(int argc, VALUE *argv, VALUE self)
 
     res = rb_econv_convert(ec, &ip, is, &op, os, flags);
     rb_str_set_len(output, op-(unsigned char *)RSTRING_PTR(output));
-    if (!NIL_P(input))
+    if (!NIL_P(input)) {
+        OBJ_INFECT_RAW(output, input);
         rb_str_drop_bytes(input, ip - (unsigned char *)RSTRING_PTR(input));
+    }
 
     if (NIL_P(output_bytesize_v) && res == econv_destination_buffer_full) {
         if (LONG_MAX / 2 < output_bytesize)

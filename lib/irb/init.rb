@@ -1,7 +1,8 @@
+# frozen_string_literal: false
 #
 #   irb/init.rb - irb initialize module
 #   	$Release Version: 0.9.6$
-#   	$Revision: 47114 $
+#   	$Revision: 53141 $
 #   	by Keiju ISHITSUKA(keiju@ruby-lang.org)
 #
 # --

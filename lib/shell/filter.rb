@@ -1,7 +1,8 @@
+# frozen_string_literal: false
 #
 #   shell/filter.rb -
 #       $Release Version: 0.7 $
-#       $Revision: 44221 $
+#       $Revision: 53141 $
 #       by Keiju ISHITSUKA(keiju@ruby-lang.org)
 #
 # --

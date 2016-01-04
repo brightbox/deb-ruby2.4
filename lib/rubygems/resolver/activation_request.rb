@@ -1,3 +1,4 @@
+# frozen_string_literal: false
 ##
 # Specifies a Specification object that should be activated.  Also contains a
 # dependency that was used to introduce this activation.
@@ -66,6 +67,8 @@ class Gem::Resolver::ActivationRequest
   def full_name
     @spec.full_name
   end
+
+  alias_method :to_s, :full_name
 
   ##
   # The Gem::Specification for this activation request.
@@ -169,4 +172,3 @@ class Gem::Resolver::ActivationRequest
   end
 
 end
-

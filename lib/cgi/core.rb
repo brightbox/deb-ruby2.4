@@ -1,3 +1,4 @@
+# frozen_string_literal: false
 #--
 # Methods for generating HTML, parsing CGI-related parameters, and
 # generating HTTP responses.
@@ -15,7 +16,7 @@ class CGI
   # Standard internet newline sequence
   EOL = CR + LF
 
-  REVISION = '$Id: core.rb 46973 2014-07-27 11:04:28Z hsbt $' #:nodoc:
+  REVISION = '$Id: core.rb 53141 2015-12-16 05:07:31Z naruse $' #:nodoc:
 
   # Whether processing will be required in binary vs text
   NEEDS_BINMODE = File::BINARY != 0

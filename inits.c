@@ -2,7 +2,7 @@
 
   inits.c -
 
-  $Author: akr $
+  $Author: kosaki $
   created at: Tue Dec 28 16:01:58 JST 1993
 
   Copyright (C) 1993-2007 Yukihiro Matsumoto
@@ -17,7 +17,7 @@ void
 rb_call_inits(void)
 {
     CALL(Method);
-    CALL(RandomSeed);
+    CALL(RandomSeedCore);
     CALL(sym);
     CALL(var_tables);
     CALL(Object);

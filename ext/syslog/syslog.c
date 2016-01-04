@@ -5,7 +5,7 @@
  * Documented by mathew <meta@pobox.com>
  *
  * $RoughId: syslog.c,v 1.21 2002/02/25 12:21:17 knu Exp $
- * $Id: syslog.c 47792 2014-10-04 23:09:32Z nobu $
+ * $Id: syslog.c 52275 2015-10-25 00:43:06Z nobu $
  */
 
 #include "ruby/ruby.h"
@@ -304,9 +304,7 @@ static VALUE mSyslog_log(int argc, VALUE *argv, VALUE self)
 {
     VALUE pri;
 
-    if (argc < 2) {
-        rb_raise(rb_eArgError, "wrong number of arguments (%d for 2+)", argc);
-    }
+    rb_check_arity(argc, 2, UNLIMITED_ARGUMENTS);
 
     argc--;
     pri = *argv++;

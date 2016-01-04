@@ -1,3 +1,4 @@
+# frozen_string_literal: false
 # = net/pop.rb
 #
 # Copyright (c) 1999-2007 Yukihiro Matsumoto.
@@ -15,7 +16,7 @@
 # NOTE: You can find Japanese version of this document at:
 # http://www.ruby-lang.org/ja/man/html/net_pop.html
 #
-#   $Id: pop.rb 44164 2013-12-13 02:38:55Z a_matsuda $
+#   $Id: pop.rb 53141 2015-12-16 05:07:31Z naruse $
 #
 # See Net::POP3 for documentation.
 #
@@ -195,7 +196,7 @@ module Net
   class POP3 < Protocol
 
     # svn revision of this library
-    Revision = %q$Revision: 44164 $.split[1]
+    Revision = %q$Revision: 53141 $.split[1]
 
     #
     # Class Parameters

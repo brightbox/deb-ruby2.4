@@ -1,7 +1,8 @@
+# frozen_string_literal: false
 #
 #   shell/process-controller.rb -
 #       $Release Version: 0.7 $
-#       $Revision: 47284 $
+#       $Revision: 53141 $
 #       by Keiju ISHITSUKA(keiju@ruby-lang.org)
 #
 # --

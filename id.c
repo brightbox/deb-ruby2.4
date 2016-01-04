@@ -10,6 +10,55 @@
 
 **********************************************************************/
 
+#define tDOT2 RUBY_TOKEN(DOT2)
+#define tDOT3 RUBY_TOKEN(DOT3)
+#define tUPLUS RUBY_TOKEN(UPLUS)
+#define tUMINUS RUBY_TOKEN(UMINUS)
+#define tPOW RUBY_TOKEN(POW)
+#define tCMP RUBY_TOKEN(CMP)
+#define tLSHFT RUBY_TOKEN(LSHFT)
+#define tRSHFT RUBY_TOKEN(RSHFT)
+#define tLEQ RUBY_TOKEN(LEQ)
+#define tGEQ RUBY_TOKEN(GEQ)
+#define tEQ RUBY_TOKEN(EQ)
+#define tEQQ RUBY_TOKEN(EQQ)
+#define tNEQ RUBY_TOKEN(NEQ)
+#define tMATCH RUBY_TOKEN(MATCH)
+#define tNMATCH RUBY_TOKEN(NMATCH)
+#define tAREF RUBY_TOKEN(AREF)
+#define tASET RUBY_TOKEN(ASET)
+#define tCOLON2 RUBY_TOKEN(COLON2)
+#define tANDOP RUBY_TOKEN(ANDOP)
+#define tOROP RUBY_TOKEN(OROP)
+#define tANDDOT RUBY_TOKEN(ANDDOT)
+
+static const struct {
+    unsigned short token;
+    const char name[3], term;
+} op_tbl[] = {
+    {tDOT2, ".."},
+    {tDOT3, "..."},
+    {tUPLUS, "+@"},
+    {tUMINUS, "-@"},
+    {tPOW, "**"},
+    {tCMP, "<=>"},
+    {tLSHFT, "<<"},
+    {tRSHFT, ">>"},
+    {tLEQ, "<="},
+    {tGEQ, ">="},
+    {tEQ, "=="},
+    {tEQQ, "==="},
+    {tNEQ, "!="},
+    {tMATCH, "=~"},
+    {tNMATCH, "!~"},
+    {tAREF, "[]"},
+    {tASET, "[]="},
+    {tCOLON2, "::"},
+    {tANDOP, "&&"},
+    {tOROP, "||"},
+    {tANDDOT, "&."},
+};
+
 static void
 Init_id(void)
 {

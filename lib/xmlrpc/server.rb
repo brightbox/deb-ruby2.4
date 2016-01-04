@@ -1,3 +1,4 @@
+# frozen_string_literal: false
 # xmlrpc/server.rb
 # Copyright (C) 2001, 2002, 2003, 2005 by Michael Neumann (mneumann@ntecs.de)
 #
@@ -702,6 +703,6 @@ end # module XMLRPC
 
 =begin
 = History
-    $Id: server.rb 44049 2013-12-07 10:27:27Z a_matsuda $
+    $Id: server.rb 53141 2015-12-16 05:07:31Z naruse $
 =end
 

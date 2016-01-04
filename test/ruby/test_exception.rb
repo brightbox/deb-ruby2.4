@@ -1,3 +1,4 @@
+# frozen_string_literal: false
 require 'test/unit'
 require 'tempfile'
 
@@ -302,6 +303,10 @@ class TestException < Test::Unit::TestCase
     assert_raise_with_message(TypeError, /C\u{4032}/) do
       [*o]
     end
+    obj = eval("class C\u{1f5ff}; self; end").new
+    assert_raise_with_message(TypeError, /C\u{1f5ff}/) do
+      Class.new {include obj}
+    end
   end
 
   def test_errat
@@ -425,9 +430,11 @@ end.join
     bug3237 = '[ruby-core:29948]'
     str = "\u2600"
     id = :"\u2604"
-    msg = "undefined method `#{id}' for #{str.inspect}:String"
-    assert_raise_with_message(NoMethodError, msg, bug3237) do
-      str.__send__(id)
+    EnvUtil.with_default_external(Encoding::UTF_8) do
+      msg = "undefined method `#{id}' for #{str.inspect}:String"
+      assert_raise_with_message(NoMethodError, msg, bug3237) do
+        str.__send__(id)
+      end
     end
   end
 
@@ -659,19 +666,39 @@ end.join
 
   def test_name_error_info
     obj = BasicObject.new
+    class << obj
+      alias object_id __id__
+      def pretty_inspect; "`obj'"; end
+    end
     e = assert_raise(NameError) {
       obj.instance_eval("Object")
     }
     assert_equal(:Object, e.name)
     e = assert_raise(NameError) {
+      BasicObject::X
+    }
+    assert_same(BasicObject, e.receiver)
+    e = assert_raise(NameError) {
       obj.instance_eval {foo}
     }
     assert_equal(:foo, e.name)
+    assert_same(obj, e.receiver)
     e = assert_raise(NoMethodError) {
       obj.foo(1, 2)
     }
     assert_equal(:foo, e.name)
     assert_equal([1, 2], e.args)
+    assert_same(obj, e.receiver)
+    def obj.test(a, b=nil, *c, &d)
+      e = a
+      1.times {|f| g = foo}
+    end
+    e = assert_raise(NameError) {
+      obj.test(3)
+    }
+    assert_equal(:foo, e.name)
+    assert_same(obj, e.receiver)
+    assert_equal(%i[a b c d e f g], e.local_variables.sort)
   end
 
   def test_output_string_encoding
@@ -704,5 +731,13 @@ $stderr = $stdout; raise "\x82\xa0"') do |outs, errs, status|
     a = Class.new {def method_missing(*) super end}.new
     assert_raise(NameError) {a.instance_eval("foo")}
     assert_raise(NoMethodError, bug10969) {a.public_send("bar", true)}
+  end
+
+  def test_message_of_name_error
+    assert_raise_with_message(NameError, /\Aundefined method `foo' for module `#<Module:.*>'$/) do
+      Module.new do
+        module_function :foo
+      end
+    end
   end
 end

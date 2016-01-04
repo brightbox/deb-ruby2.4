@@ -6,6 +6,7 @@
 #include "ruby/ruby.h"
 #include "internal.h"
 #include "vm_core.h"
+#include "iseq.h"
 
 
 static const char prelude_name0[] = "<internal:prelude>";
@@ -20,9 +21,128 @@ static const char prelude_code0[] =
 "\n"
 "\n"
 "  def self.exclusive\n"
+"    warn \"Thread.exclusive is deprecated, use Mutex\", caller\n"
 "    MUTEX_FOR_THREAD_EXCLUSIVE.synchronize{\n"
 "      yield\n"
 "    }\n"
+"  end\n"
+"end\n"
+"\n"
+"class IO\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"  def read_nonblock(len, buf = nil, exception: true)\n"
+"    __read_nonblock(len, buf, exception)\n"
+"  end\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"  def write_nonblock(buf, exception: true)\n"
+"    __write_nonblock(buf, exception)\n"
 "  end\n"
 "end\n"
 ;
@@ -37,14 +157,36 @@ static const char prelude_code1[] =
 
 static const char prelude_name2[] = "<internal:gem_prelude>";
 static const char prelude_code2[] =
-"require 'rubygems.rb' if defined?(Gem)\n"
+"if defined?(Gem)\n"
+"  require 'rubygems.rb'\n"
+"  begin\n"
+"    require 'did_you_mean'\n"
+"  rescue LoadError\n"
+"  end if defined?(DidYouMean)\n"
+"end\n"
 ;
 
 
 static void
-prelude_eval(VALUE code, VALUE name, VALUE line)
+prelude_eval(VALUE code, VALUE name, int line)
 {
-    rb_iseq_eval(rb_iseq_compile_with_option(code, name, Qnil, line, 0, Qtrue));
+    static const rb_compile_option_t optimization = {
+	TRUE, /* int inline_const_cache; */
+	TRUE, /* int peephole_optimization; */
+	TRUE, /* int tailcall_optimization */
+	TRUE, /* int specialized_instruction; */
+	TRUE, /* int operands_unification; */
+	TRUE, /* int instructions_unification; */
+	TRUE, /* int stack_caching; */
+	FALSE, /* int trace_instruction */
+	TRUE,
+	FALSE,
+    };
+
+    NODE *node = rb_parser_compile_string_path(rb_parser_new(), name, code, line);
+    if (!node) rb_exc_raise(rb_errinfo());
+    rb_iseq_eval(rb_iseq_new_with_opt(node, name, name, Qnil, INT2FIX(line),
+				      NULL, ISEQ_TYPE_TOP, &optimization));
 }
 
 void

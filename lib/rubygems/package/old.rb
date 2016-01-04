@@ -1,3 +1,4 @@
+# frozen_string_literal: false
 #--
 # Copyright 2006 by Chad Fowler, Rich Kilmer, Jim Weirich and others.
 # All rights reserved.
@@ -18,14 +19,14 @@ class Gem::Package::Old < Gem::Package
   # Creates a new old-format package reader for +gem+.  Old-format packages
   # cannot be written.
 
-  def initialize gem
+  def initialize gem, security_policy
     require 'fileutils'
     require 'zlib'
     Gem.load_yaml
 
     @contents        = nil
     @gem             = gem
-    @security_policy = nil
+    @security_policy = security_policy
     @spec            = nil
   end
 

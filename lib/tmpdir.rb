@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 #
 # tmpdir - retrieve temporary directory path
 #
-# $Id: tmpdir.rb 48905 2014-12-20 08:58:07Z akr $
+# $Id: tmpdir.rb 52526 2015-11-10 11:48:14Z akr $
 #
 
 require 'fileutils'
@@ -19,7 +20,7 @@ class Dir
 
   def self.tmpdir
     if $SAFE > 0
-      @@systmpdir
+      @@systmpdir.dup
     else
       tmp = nil
       [ENV['TMPDIR'], ENV['TMP'], ENV['TEMP'], @@systmpdir, '/tmp', '.'].each do |dir|
@@ -111,7 +112,7 @@ class Dir
       suffix &&= (String.try_convert(suffix) or
                   raise ArgumentError, "unexpected suffix: #{suffix.inspect}")
       t = Time.now.strftime("%Y%m%d")
-      path = "#{prefix}#{t}-#{$$}-#{rand(0x100000000).to_s(36)}"
+      path = "#{prefix}#{t}-#{$$}-#{rand(0x100000000).to_s(36)}".dup
       path << "-#{n}" if n
       path << suffix if suffix
       path

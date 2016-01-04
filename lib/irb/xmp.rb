@@ -1,7 +1,8 @@
+# frozen_string_literal: false
 #
 #   xmp.rb - irb version of gotoken xmp
 #   	$Release Version: 0.9$
-#   	$Revision: 47266 $
+#   	$Revision: 53141 $
 #   	by Keiju ISHITSUKA(Nippon Rational Inc.)
 #
 # --

@@ -1,6 +1,6 @@
 # -*- ruby -*-
-_VERSION = "1.2.6"
-date = %w$Date:: 2015-07-01 04:17:07 +0900#$[1]
+_VERSION = "1.2.8"
+date = %w$Date:: 2015-12-22 21:20:28 +0900#$[1]
 
 Gem::Specification.new do |s|
   s.name = "bigdecimal"

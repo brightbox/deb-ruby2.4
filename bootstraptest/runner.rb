@@ -1,6 +1,6 @@
 "exec" "${RUBY-ruby}" "-x" "$0" "$@" || true # -*- mode: ruby; coding: utf-8 -*-
 #!./ruby
-# $Id: runner.rb 46486 2014-06-21 23:43:50Z akr $
+# $Id: runner.rb 53110 2015-12-14 08:04:28Z hsbt $
 
 # NOTE:
 # Never use optparse in this file.
@@ -136,9 +136,15 @@ End
   @tty &&= !@verbose
   if @color
     # dircolors-like style
-    colors = (colors = ENV['TEST_COLORS']) ? Hash[colors.scan(/(\w+)=([^:]*)/)] : {}
-    @passed = "\e[#{colors["pass"] || "32"}m"
-    @failed = "\e[#{colors["fail"] || "31"}m"
+    colors = (colors = ENV['TEST_COLORS']) ? Hash[colors.scan(/(\w+)=([^:\n]*)/)] : {}
+    begin
+      File.read(File.join(__dir__, "../test/colors")).scan(/(\w+)=([^:\n]*)/) do |n, c|
+        colors[n] ||= c
+      end
+    rescue
+    end
+    @passed = "\e[;#{colors["pass"] || "32"}m"
+    @failed = "\e[;#{colors["fail"] || "31"}m"
     @reset = "\e[m"
   else
     @passed = @failed = @reset = ""
@@ -341,7 +347,7 @@ def assert_normal_exit(testsrc, *rest)
       $stderr.reopen(old_stderr)
       old_stderr.close
     end
-    if status && status.signaled?
+    if status&.signaled?
       signo = status.termsig
       signame = Signal.list.invert[signo]
       unless ignore_signals and ignore_signals.include?(signame)

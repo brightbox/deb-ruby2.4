@@ -39,8 +39,6 @@ enum ruby_id_types {
 #define ID_JUNK        RUBY_ID_JUNK
 #define ID_INTERNAL    RUBY_ID_INTERNAL
 
-#define ID2ATTRSET(id) (((id)&~ID_SCOPE_MASK)|ID_ATTRSET)
-
 #define symIFUNC ID2SYM(idIFUNC)
 #define symCFUNC ID2SYM(idCFUNC)
 
@@ -66,6 +64,7 @@ enum ruby_id_types {
 #define RUBY_TOKEN_COLON3 147
 #define RUBY_TOKEN_ANDOP 148
 #define RUBY_TOKEN_OROP 149
+#define RUBY_TOKEN_ANDDOT 150
 #define RUBY_TOKEN(t) RUBY_TOKEN_##t
 
 enum ruby_method_ids {
@@ -80,11 +79,11 @@ enum ruby_method_ids {
     idMULT = '*',
     idDIV = '/',
     idMOD = '%',
-    idLT = '<',
     idLTLT = RUBY_TOKEN(LSHFT),
+    idGTGT = RUBY_TOKEN(RSHFT),
+    idLT = '<',
     idLE = RUBY_TOKEN(LEQ),
     idGT = '>',
-    idGTGT = RUBY_TOKEN(RSHFT),
     idGE = RUBY_TOKEN(GEQ),
     idEq = RUBY_TOKEN(EQ),
     idEqq = RUBY_TOKEN(EQQ),
@@ -98,7 +97,8 @@ enum ruby_method_ids {
     idCOLON2 = RUBY_TOKEN(COLON2),
     idANDOP = RUBY_TOKEN(ANDOP),
     idOROP = RUBY_TOKEN(OROP),
-    tPRESERVED_ID_BEGIN = 149,
+    idANDDOT = RUBY_TOKEN(ANDDOT),
+    tPRESERVED_ID_BEGIN = 150,
     idNULL,
     idEmptyP,
     idEqlP,
@@ -116,6 +116,7 @@ enum ruby_method_ids {
     id_core_hash_merge_ary,
     id_core_hash_merge_ptr,
     id_core_hash_merge_kwd,
+    id_debug_created_info,
     tPRESERVED_ID_END,
     tFreeze,
     tInspect,

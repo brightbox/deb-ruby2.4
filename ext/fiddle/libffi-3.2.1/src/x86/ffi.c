@@ -204,6 +204,7 @@ unsigned int ffi_prep_args(char *stack, extended_cif *ecif)
      on top of stack, so that those can be moved to registers by call-handler.  */
   if (stack_args_count > 0)
     {
+      int i;
       if (dir < 0 && stack_args_count > 1)
         {
           /* Reverse order if iterating arguments backwards */
@@ -212,7 +213,6 @@ unsigned int ffi_prep_args(char *stack, extended_cif *ecif)
           *(ffi_arg*) p_stack_data[stack_args_count - 1] = tmp;
         }
       
-      int i;
       for (i = 0; i < stack_args_count; i++)
         {
           if (p_stack_data[i] != argp2)
@@ -571,11 +571,12 @@ ffi_prep_incoming_args(char *stack, void **rvalue, void **avalue,
        i < cif->nargs && passed_regs < max_stack_count;
        i++, p_arg++)
     {
+      size_t sz;
       if ((*p_arg)->type == FFI_TYPE_FLOAT
          || (*p_arg)->type == FFI_TYPE_STRUCT)
         continue;
 
-      size_t sz = (*p_arg)->size;
+      sz = (*p_arg)->size;
       if(sz == 0 || sz > FFI_SIZEOF_ARG)
         continue;
 
@@ -859,11 +860,12 @@ ffi_prep_args_raw(char *stack, extended_cif *ecif)
   
   for (i = 0; i < cif->nargs && passed_regs <= max_regs; i++)
     {
+      size_t sz;
       if (cif->arg_types[i]->type == FFI_TYPE_FLOAT
          || cif->arg_types[i]->type == FFI_TYPE_STRUCT)
         continue;
 
-      size_t sz = cif->arg_types[i]->size;
+      sz = cif->arg_types[i]->size;
       if (sz == 0 || sz > FFI_SIZEOF_ARG)
         continue;
 

@@ -31,7 +31,7 @@
  *
  * $OrigId: sha2.c,v 1.1 2001/11/08 00:01:51 adg Exp adg $
  * $RoughId: sha2.c,v 1.3 2002/02/26 22:03:36 knu Exp $
- * $Id: sha2.c 52739 2015-11-24 15:28:43Z nagachika $
+ * $Id: sha2.c 52694 2015-11-21 04:35:57Z naruse $
  */
 
 #include "../defs.h"
@@ -67,7 +67,7 @@
  * Please make sure that your system defines BYTE_ORDER.  If your
  * architecture is little-endian, make sure it also defines
  * LITTLE_ENDIAN and that the two (BYTE_ORDER and LITTLE_ENDIAN) are
- * equivilent.
+ * equivalent.
  *
  * If your system does not define the above, then you can do so by
  * hand like this:

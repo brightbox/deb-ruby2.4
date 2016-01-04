@@ -2,12 +2,12 @@
 
   bubblebabble.c - BubbleBabble encoding support
 
-  $Author: nagachika $
+  $Author: naruse $
   created at: Fri Oct 13 18:31:42 JST 2006
 
   Copyright (C) 2006 Akinori MUSHA
 
-  $Id: bubblebabble.c 52739 2015-11-24 15:28:43Z nagachika $
+  $Id: bubblebabble.c 52694 2015-11-21 04:35:57Z naruse $
 
 ************************************************/
 

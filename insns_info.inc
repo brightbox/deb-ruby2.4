@@ -17,6 +17,7 @@
 #define TS_GENTRY 'G'
 #define TS_IC 'K'
 #define TS_CALLINFO 'C'
+#define TS_CALLCACHE 'E'
 #define TS_CDHASH 'H'
 #define TS_ISEQ 'S'
 #define TS_VARIABLE '.'
@@ -44,6 +45,7 @@ static const char *const insn_name_info[] = {
   "putstring",
   "concatstrings",
   "tostring",
+  "freezestring",
   "toregexp",
   "newarray",
   "duparray",
@@ -56,6 +58,7 @@ static const char *const insn_name_info[] = {
   "dup",
   "dupn",
   "swap",
+  "reverse",
   "reput",
   "topn",
   "setn",
@@ -75,6 +78,7 @@ static const char *const insn_name_info[] = {
   "jump",
   "branchif",
   "branchunless",
+  "branchnil",
   "getinlinecache",
   "setinlinecache",
   "once",
@@ -136,6 +140,7 @@ static const char *const insn_operand_info[] = {
   "V",
   "N",
   "",
+  "V",
   "NN",
   "N",
   "V",
@@ -148,6 +153,7 @@ static const char *const insn_operand_info[] = {
   "",
   "N",
   "",
+  "N",
   "",
   "N",
   "N",
@@ -157,13 +163,14 @@ static const char *const insn_operand_info[] = {
   "LN",
   "N",
   "ISN",
-  "C",
+  "CES",
   "V",
-  "C",
-  "C",
+  "CE",
+  "CES",
   "C",
   "",
   "N",
+  "O",
   "O",
   "O",
   "O",
@@ -171,29 +178,29 @@ static const char *const insn_operand_info[] = {
   "K",
   "SK",
   "HO",
-  "C",
-  "C",
-  "C",
-  "C",
-  "C",
-  "C",
-  "CC",
-  "C",
-  "C",
-  "C",
-  "C",
-  "C",
-  "C",
-  "C",
-  "CV",
-  "CV",
-  "C",
-  "C",
-  "C",
-  "C",
-  "C",
+  "CE",
+  "CE",
+  "CE",
+  "CE",
+  "CE",
+  "CE",
+  "CECE",
+  "CE",
+  "CE",
+  "CE",
+  "CE",
+  "CE",
+  "CE",
+  "CE",
+  "CEV",
+  "CEV",
+  "CE",
+  "CE",
+  "CE",
+  "CE",
+  "CE",
   "V",
-  "C",
+  "CE",
   "F",
   "",
   "",
@@ -228,10 +235,11 @@ static const int insn_len_info[] = {
   2,
   2,
   1,
-  3,
-  2,
   2,
   3,
+  2,
+  2,
+  3,
   1,
   2,
   2,
@@ -240,6 +248,7 @@ static const int insn_len_info[] = {
   1,
   2,
   1,
+  2,
   1,
   2,
   2,
@@ -249,43 +258,44 @@ static const int insn_len_info[] = {
   3,
   2,
   4,
+  4,
   2,
-  2,
-  2,
-  2,
+  3,
+  4,
   2,
   1,
   2,
   2,
   2,
   2,
-  3,
-  2,
-  3,
-  3,
-  2,
-  2,
-  2,
-  2,
-  2,
   2,
   3,
   2,
-  2,
-  2,
-  2,
-  2,
-  2,
-  2,
   3,
   3,
+  3,
+  3,
+  3,
+  3,
+  3,
+  3,
+  5,
+  3,
+  3,
+  3,
+  3,
+  3,
+  3,
+  3,
+  4,
+  4,
+  3,
+  3,
+  3,
+  3,
+  3,
   2,
-  2,
-  2,
-  2,
-  2,
-  2,
-  2,
+  3,
   2,
   1,
   1,
@@ -329,6 +339,7 @@ static const int insn_stack_push_num_info[] = {
   1,
   1,
   1,
+  1,
   0,
   2,
   1,
@@ -340,6 +351,7 @@ static const int insn_stack_push_num_info[] = {
   1,
   1,
   1,
+  1,
   0,
   1,
   1,
@@ -349,6 +361,7 @@ static const int insn_stack_push_num_info[] = {
   1,
   1,
   1,
+  0,
   0,
   0,
   0,
@@ -463,6 +476,9 @@ insn_stack_increase(int depth, int insn, VALUE *opes)
         case BIN(tostring):{
           return depth + 0;
         }
+        case BIN(freezestring):{
+          return depth + 0;
+        }
         case BIN(toregexp):{
           int inc = 0;
         int cnt = FIX2INT(opes[1]);
@@ -514,6 +530,11 @@ insn_stack_increase(int depth, int insn, VALUE *opes)
         }
         case BIN(swap):{
           return depth + 0;
+        }
+        case BIN(reverse):{
+          int inc = 0;
+        inc += 0;;
+        return depth + inc;
         }
         case BIN(reput):{
           int inc = 0;
@@ -591,6 +612,9 @@ insn_stack_increase(int depth, int insn, VALUE *opes)
           return depth + -1;
         }
         case BIN(branchunless):{
+          return depth + -1;
+        }
+        case BIN(branchnil):{
           return depth + -1;
         }
         case BIN(getinlinecache):{

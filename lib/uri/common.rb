@@ -1,8 +1,9 @@
+# frozen_string_literal: false
 #--
 # = uri/common.rb
 #
 # Author:: Akira Yamada <akira@ruby-lang.org>
-# Revision:: $Id: common.rb 47299 2014-08-27 12:21:41Z hsbt $
+# Revision:: $Id: common.rb 53141 2015-12-16 05:07:31Z naruse $
 # License::
 #   You can redistribute it and/or modify it under the same term as Ruby.
 #
@@ -245,7 +246,7 @@ module URI
   #   require 'uri'
   #
   #   p URI.join("http://example.com/","main.rbx")
-  #   # => #<URI::HTTP:0x2022ac02 URL:http://localhost/main.rbx>
+  #   # => #<URI::HTTP:0x2022ac02 URL:http://example.com/main.rbx>
   #
   #   p URI.join('http://example.com', 'foo')
   #   # => #<URI::HTTP:0x01ab80a0 URL:http://example.com/foo>
@@ -346,8 +347,8 @@ module URI
   TBLDECWWWCOMP_['+'] = ' '
   TBLDECWWWCOMP_.freeze
 
-  HTML5ASCIIINCOMPAT = [Encoding::UTF_7, Encoding::UTF_16BE, Encoding::UTF_16LE,
-    Encoding::UTF_32BE, Encoding::UTF_32LE] # :nodoc:
+  HTML5ASCIIINCOMPAT = defined? Encoding::UTF_7 ? [Encoding::UTF_7, Encoding::UTF_16BE, Encoding::UTF_16LE,
+    Encoding::UTF_32BE, Encoding::UTF_32LE] : [] # :nodoc:
 
   # Encode given +str+ to URL-encoded form data.
   #
@@ -438,12 +439,12 @@ module URI
   # This refers http://url.spec.whatwg.org/#concept-urlencoded-parser ,
   # so this supports only &-separator, don't support ;-separator.
   #
-  # ary = URI.decode_www_form("a=1&a=2&b=3")
-  # p ary                  #=> [['a', '1'], ['a', '2'], ['b', '3']]
-  # p ary.assoc('a').last  #=> '1'
-  # p ary.assoc('b').last  #=> '3'
-  # p ary.rassoc('a').last #=> '2'
-  # p Hash[ary]            # => {"a"=>"2", "b"=>"3"}
+  #    ary = URI.decode_www_form("a=1&a=2&b=3")
+  #    p ary                  #=> [['a', '1'], ['a', '2'], ['b', '3']]
+  #    p ary.assoc('a').last  #=> '1'
+  #    p ary.assoc('b').last  #=> '3'
+  #    p ary.rassoc('a').last #=> '2'
+  #    p Hash[ary]            # => {"a"=>"2", "b"=>"3"}
   #
   # See URI.decode_www_form_component, URI.encode_www_form
   def self.decode_www_form(str, enc=Encoding::UTF_8, separator: '&', use__charset_: false, isindex: false)
