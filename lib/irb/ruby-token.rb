@@ -1,7 +1,8 @@
+# frozen_string_literal: false
 #
 #   irb/ruby-token.rb - ruby tokens
 #   	$Release Version: 0.9.6$
-#   	$Revision: 47298 $
+#   	$Revision: 53141 $
 #   	by Keiju ISHITSUKA(keiju@ruby-lang.org)
 #
 # --

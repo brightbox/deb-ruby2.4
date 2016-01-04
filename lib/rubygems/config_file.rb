@@ -1,3 +1,4 @@
+# frozen_string_literal: false
 #--
 # Copyright 2006 by Chad Fowler, Rich Kilmer, Jim Weirich and others.
 # All rights reserved.
@@ -321,11 +322,11 @@ if you believe they were disclosed to a third party.
     @rubygems_api_key = api_key
   end
 
-  YAMLErrors = [ArgumentError]
-  YAMLErrors << Psych::SyntaxError if defined?(Psych::SyntaxError)
-
   def load_file(filename)
     Gem.load_yaml
+
+    yaml_errors = [ArgumentError]
+    yaml_errors << Psych::SyntaxError if defined?(Psych::SyntaxError)
 
     return {} unless filename and File.exist? filename
 
@@ -336,7 +337,7 @@ if you believe they were disclosed to a third party.
         return {}
       end
       return content
-    rescue *YAMLErrors => e
+    rescue *yaml_errors => e
       warn "Failed to load #{filename}, #{e}"
     rescue Errno::EACCES
       warn "Failed to load #{filename} due to permissions problem."

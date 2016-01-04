@@ -1,4 +1,5 @@
-# $Id: test_verbose.rb 39544 2013-03-01 02:09:42Z drbrain $
+# frozen_string_literal: false
+# $Id: test_verbose.rb 53141 2015-12-16 05:07:31Z naruse $
 
 require 'test/unit'
 require 'fileutils'

@@ -6,6 +6,7 @@
 #include "ruby/ruby.h"
 #include "internal.h"
 #include "vm_core.h"
+#include "iseq.h"
 
 
 static const char prelude_name0[] = "<internal:golf_prelude>";
@@ -137,9 +138,25 @@ static const char prelude_code0[] =
 
 
 static void
-prelude_eval(VALUE code, VALUE name, VALUE line)
+prelude_eval(VALUE code, VALUE name, int line)
 {
-    rb_iseq_eval(rb_iseq_compile_with_option(code, name, Qnil, line, 0, Qtrue));
+    static const rb_compile_option_t optimization = {
+	TRUE, /* int inline_const_cache; */
+	TRUE, /* int peephole_optimization; */
+	TRUE, /* int tailcall_optimization */
+	TRUE, /* int specialized_instruction; */
+	TRUE, /* int operands_unification; */
+	TRUE, /* int instructions_unification; */
+	TRUE, /* int stack_caching; */
+	FALSE, /* int trace_instruction */
+	TRUE,
+	FALSE,
+    };
+
+    NODE *node = rb_parser_compile_string_path(rb_parser_new(), name, code, line);
+    if (!node) rb_exc_raise(rb_errinfo());
+    rb_iseq_eval(rb_iseq_new_with_opt(node, name, name, Qnil, INT2FIX(line),
+				      NULL, ISEQ_TYPE_TOP, &optimization));
 }
 
 void

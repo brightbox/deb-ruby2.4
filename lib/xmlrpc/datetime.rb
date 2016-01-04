@@ -1,3 +1,4 @@
+# frozen_string_literal: false
 #
 # xmlrpc/datetime.rb
 # Copyright (C) 2001, 2002, 2003 by Michael Neumann (mneumann@ntecs.de)
@@ -125,5 +126,5 @@ end # module XMLRPC
 
 =begin
 = History
-    $Id: datetime.rb 44024 2013-12-06 02:10:11Z hsbt $
+    $Id: datetime.rb 53141 2015-12-16 05:07:31Z naruse $
 =end

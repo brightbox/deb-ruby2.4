@@ -1,7 +1,8 @@
+# frozen_string_literal: false
 #
 #   forwardable.rb -
 #       $Release Version: 1.1$
-#       $Revision: 40906 $
+#       $Revision: 53141 $
 #       by Keiju ISHITSUKA(keiju@ishitsuka.com)
 #       original definition by delegator.rb
 #       Revised by Daniel J. Berger with suggestions from Florian Gross.
@@ -181,8 +182,8 @@ module Forwardable
       def #{ali}(*args, &block)
         begin
           #{accessor}.__send__(:#{method}, *args, &block)
-        rescue Exception
-          $@.delete_if{|s| Forwardable::FILE_REGEXP =~ s} unless Forwardable::debug
+        rescue ::Exception
+          $@.delete_if{|s| ::Forwardable::FILE_REGEXP =~ s} unless ::Forwardable::debug
           ::Kernel::raise
         end
       end
@@ -273,8 +274,8 @@ module SingleForwardable
       def #{ali}(*args, &block)
         begin
           #{accessor}.__send__(:#{method}, *args, &block)
-        rescue Exception
-          $@.delete_if{|s| Forwardable::FILE_REGEXP =~ s} unless Forwardable::debug
+        rescue ::Exception
+          $@.delete_if{|s| ::Forwardable::FILE_REGEXP =~ s} unless ::Forwardable::debug
           ::Kernel::raise
         end
       end

@@ -1,7 +1,8 @@
+# frozen_string_literal: false
 #
 #   notifier.rb - output methods used by irb
 #   	$Release Version: 0.9.6$
-#   	$Revision: 47112 $
+#   	$Revision: 53141 $
 #   	by Keiju ISHITSUKA(keiju@ruby-lang.org)
 #
 # --

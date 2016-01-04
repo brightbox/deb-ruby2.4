@@ -1,10 +1,11 @@
+# frozen_string_literal: false
 # xmlrpc/client.rb
 # Copyright (C) 2001, 2002, 2003 by Michael Neumann (mneumann@ntecs.de)
 #
 # Released under the same term of license as Ruby.
 #
 # History
-#   $Id: client.rb 46311 2014-06-02 00:43:29Z tmm1 $
+#   $Id: client.rb 53141 2015-12-16 05:07:31Z naruse $
 #
 require "xmlrpc/parser"
 require "xmlrpc/create"

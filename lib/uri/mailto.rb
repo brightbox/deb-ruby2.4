@@ -1,8 +1,9 @@
+# frozen_string_literal: false
 # = uri/mailto.rb
 #
 # Author:: Akira Yamada <akira@ruby-lang.org>
 # License:: You can redistribute it and/or modify it under the same term as Ruby.
-# Revision:: $Id: mailto.rb 48516 2014-11-20 15:19:17Z usa $
+# Revision:: $Id: mailto.rb 53141 2015-12-16 05:07:31Z naruse $
 #
 # See URI for general documentation
 #
@@ -135,6 +136,10 @@ module URI
       @to = nil
       @headers = []
 
+      unless @opaque
+        raise InvalidComponentError,
+          "missing opaque part for mailto URL"
+      end
       to, header = @opaque.split('?', 2)
       # allow semicolon as a addr-spec separator
       # http://support.microsoft.com/kb/820868

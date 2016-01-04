@@ -1,3 +1,4 @@
+# frozen_string_literal: false
 require 'rubygems/command'
 require 'rubygems/local_remote_options'
 require 'rubygems/spec_fetcher'
@@ -227,7 +228,7 @@ is too hard to use.
 
     name_tuple, spec = detail_tuple
 
-    spec = spec.fetch_spec name_tuple unless Gem::Specification === spec
+    spec = spec.fetch_spec name_tuple if spec.respond_to? :fetch_spec
 
     entry << "\n"
 

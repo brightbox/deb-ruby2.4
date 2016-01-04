@@ -1,3 +1,4 @@
+# frozen_string_literal: false
 ##
 #
 # Gem::PathSupport facilitates the GEM_HOME and GEM_PATH environment settings
@@ -41,13 +42,6 @@ class Gem::PathSupport
   end
 
   private
-
-  ##
-  # Set the Gem home directory (as reported by Gem.dir).
-
-  def home=(home)
-    @home = home.to_s
-  end
 
   ##
   # Set the Gem search path (as reported by Gem.path).

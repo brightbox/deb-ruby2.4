@@ -1,3 +1,4 @@
+# frozen_string_literal: false
 require 'test/unit'
 
 require 'drb/drb'
@@ -547,7 +548,7 @@ module RingIPv6
     rescue NotImplementedError
       # ifindex() function may not be implemented on Windows.
       return if
-        Socket.ip_address_list.any? { |addrinfo| addrinfo.ipv6? }
+        Socket.ip_address_list.any? { |addrinfo| addrinfo.ipv6? && !addrinfo.ipv6_loopback? }
     end
     skip 'IPv6 not available'
   end
@@ -636,7 +637,7 @@ class TestRingServer < Test::Unit::TestCase
 
   def test_make_socket_ipv6_multicast
     skip 'IPv6 not available' unless
-      Socket.ip_address_list.any? { |addrinfo| addrinfo.ipv6? }
+      Socket.ip_address_list.any? { |addrinfo| addrinfo.ipv6? && !addrinfo.ipv6_loopback? }
 
     begin
       v6mc = @rs.make_socket('ff02::1')
@@ -671,7 +672,7 @@ class TestRingServer < Test::Unit::TestCase
 
   def test_ring_server_ipv6_multicast
     skip 'IPv6 not available' unless
-      Socket.ip_address_list.any? { |addrinfo| addrinfo.ipv6? }
+      Socket.ip_address_list.any? { |addrinfo| addrinfo.ipv6? && !addrinfo.ipv6_loopback? }
 
     @rs.shutdown
     begin

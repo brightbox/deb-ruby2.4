@@ -1,7 +1,8 @@
+# frozen_string_literal: false
 #
 #   irb/locale.rb - internationalization module
 #   	$Release Version: 0.9.6$
-#   	$Revision: 47266 $
+#   	$Revision: 53141 $
 #   	by Keiju ISHITSUKA(keiju@ruby-lang.org)
 #
 # --

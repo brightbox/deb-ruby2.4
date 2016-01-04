@@ -1,7 +1,8 @@
+# frozen_string_literal: false
 #
 #   frame.rb -
 #   	$Release Version: 0.9$
-#   	$Revision: 47112 $
+#   	$Revision: 53141 $
 #   	by Keiju ISHITSUKA(Nihon Rational Software Co.,Ltd)
 #
 # --

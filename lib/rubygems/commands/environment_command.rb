@@ -1,3 +1,4 @@
+# frozen_string_literal: false
 require 'rubygems/command'
 
 class Gem::Commands::EnvironmentCommand < Gem::Command
@@ -112,6 +113,8 @@ lib/rubygems/defaults/operating_system.rb
     out << ") [#{RUBY_PLATFORM}]\n"
 
     out << "  - INSTALLATION DIRECTORY: #{Gem.dir}\n"
+
+    out << "  - USER INSTALLATION DIRECTORY: #{Gem.user_dir}\n"
 
     out << "  - RUBYGEMS PREFIX: #{Gem.prefix}\n" unless Gem.prefix.nil?
 

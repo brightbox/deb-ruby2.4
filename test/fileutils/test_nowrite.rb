@@ -1,4 +1,5 @@
-# $Id: test_nowrite.rb 39544 2013-03-01 02:09:42Z drbrain $
+# frozen_string_literal: false
+# $Id: test_nowrite.rb 53141 2015-12-16 05:07:31Z naruse $
 
 require 'fileutils'
 require 'test/unit'

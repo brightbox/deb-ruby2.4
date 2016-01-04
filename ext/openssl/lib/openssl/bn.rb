@@ -1,6 +1,5 @@
+# frozen_string_literal: false
 #--
-#
-# $RCSfile$
 #
 # = Ruby-space definitions that completes C-space funcs for BN
 #
@@ -10,12 +9,8 @@
 # All rights reserved.
 #
 # = Licence
-# This program is licenced under the same licence as Ruby.
+# This program is licensed under the same licence as Ruby.
 # (See the file 'LICENCE'.)
-#
-# = Version
-# $Id: bn.rb 47647 2014-09-20 01:17:05Z akr $
-#
 #++
 
 module OpenSSL
@@ -42,4 +37,3 @@ class Integer
     OpenSSL::BN::new(self)
   end
 end # Integer
-

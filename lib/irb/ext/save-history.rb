@@ -1,6 +1,7 @@
+# frozen_string_literal: false
 #   save-history.rb -
 #   	$Release Version: 0.9.6$
-#   	$Revision: 47266 $
+#   	$Revision: 53141 $
 #   	by Keiju ISHITSUKA(keiju@ruby-lang.org)
 #
 # --

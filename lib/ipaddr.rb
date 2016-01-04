@@ -1,3 +1,4 @@
+# frozen_string_literal: false
 #
 # ipaddr.rb - A class to manipulate an IP address
 #
@@ -7,7 +8,7 @@
 #
 # You can redistribute and/or modify it under the same terms as Ruby.
 #
-# $Id: ipaddr.rb 52741 2015-11-24 15:49:21Z nagachika $
+# $Id: ipaddr.rb 53141 2015-12-16 05:07:31Z naruse $
 #
 # Contact:
 #   - Akinori MUSHA <knu@iDaemons.org> (current maintainer)

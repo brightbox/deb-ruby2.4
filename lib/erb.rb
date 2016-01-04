@@ -1,4 +1,5 @@
 # -*- coding: us-ascii -*-
+# frozen_string_literal: false
 # = ERB -- Ruby Templating
 #
 # Author:: Masatoshi SEKI
@@ -258,7 +259,7 @@ require "cgi/util"
 # Rails, the web application framework, uses ERB to create views.
 #
 class ERB
-  Revision = '$Date:: 2014-12-12 19:48:57 +0900#$' # :nodoc: #'
+  Revision = '$Date:: 2015-12-20 15:36:57 +0900#$' # :nodoc: #'
 
   # Returns revision information for the erb.rb module.
   def self.version
@@ -506,8 +507,8 @@ class ERB
       require 'strscan'
       class SimpleScanner2 < Scanner # :nodoc:
         def scan
-          stag_reg = /(.*?)(<%%|<%=|<%#|<%|\z)/m
-          etag_reg = /(.*?)(%%>|%>|\z)/m
+          stag_reg = /(.*?)(<%[%=#]?|\z)/m
+          etag_reg = /(.*?)(%%?>|\z)/m
           scanner = StringScanner.new(@src)
           while ! scanner.eos?
             scanner.scan(@stag ? etag_reg : stag_reg)

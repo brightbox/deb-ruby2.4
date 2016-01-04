@@ -1,3 +1,4 @@
+# frozen_string_literal: false
 require 'rubygems/command'
 require 'rubygems/local_remote_options'
 require 'rubygems/version_option'
@@ -21,7 +22,7 @@ via the webhooks.  If you accidentally pushed passwords or other sensitive
 data you will need to change them immediately and yank your gem.
 
 If you are yanking a gem due to intellectual property reasons contact
-http://help.rubygems.org for permanant removal.  Be sure to mention this
+http://help.rubygems.org for permanent removal.  Be sure to mention this
 as the reason for the removal request.
     EOF
   end

@@ -1,11 +1,10 @@
 /*
- * $Id: ossl_bio.c 47042 2014-08-03 01:56:01Z nobu $
  * 'OpenSSL for Ruby' team members
  * Copyright (C) 2003
  * All rights reserved.
  */
 /*
- * This program is licenced under the same licence as Ruby.
+ * This program is licensed under the same licence as Ruby.
  * (See the file 'LICENCE'.)
  */
 #include "ossl.h"
@@ -30,8 +29,9 @@ ossl_obj2bio(VALUE obj)
 	}
         rb_update_max_fd(fd);
 	if (!(fp = fdopen(fd, "r"))){
+	    int e = errno;
 	    close(fd);
-	    rb_sys_fail(0);
+	    rb_syserr_fail(e, 0);
 	}
 	if (!(bio = BIO_new_fp(fp, BIO_CLOSE))){
 	    fclose(fp);

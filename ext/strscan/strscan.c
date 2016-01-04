@@ -1,5 +1,5 @@
 /*
-    $Id: strscan.c 48672 2014-12-01 21:30:58Z nobu $
+    $Id: strscan.c 52988 2015-12-09 01:01:17Z ko1 $
 
     Copyright (c) 1999-2006 Minero Aoki
 
@@ -181,11 +181,7 @@ static size_t
 strscan_memsize(const void *ptr)
 {
     const struct strscanner *p = ptr;
-    size_t size = 0;
-    if (p) {
-	size = sizeof(*p) - sizeof(p->regs) + onig_region_memsize(&p->regs);
-    }
-    return size;
+    return sizeof(*p) - sizeof(p->regs) + onig_region_memsize(&p->regs);
 }
 
 static const rb_data_type_t strscanner_type = {
@@ -198,12 +194,12 @@ static VALUE
 strscan_s_allocate(VALUE klass)
 {
     struct strscanner *p;
+    VALUE obj = TypedData_Make_Struct(klass, struct strscanner, &strscanner_type, p);
 
-    p = ZALLOC(struct strscanner);
     CLEAR_MATCH_STATUS(p);
     onig_region_init(&(p->regs));
     p->str = Qnil;
-    return TypedData_Wrap_Struct(klass, &strscanner_type, p);
+    return obj;
 }
 
 /*
@@ -1340,7 +1336,7 @@ Init_strscan(void)
     tmp = rb_str_new2(STRSCAN_VERSION);
     rb_obj_freeze(tmp);
     rb_const_set(StringScanner, rb_intern("Version"), tmp);
-    tmp = rb_str_new2("$Id: strscan.c 48672 2014-12-01 21:30:58Z nobu $");
+    tmp = rb_str_new2("$Id: strscan.c 52988 2015-12-09 01:01:17Z ko1 $");
     rb_obj_freeze(tmp);
     rb_const_set(StringScanner, rb_intern("Id"), tmp);
 

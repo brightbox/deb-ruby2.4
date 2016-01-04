@@ -1,3 +1,4 @@
+# frozen_string_literal: false
 ##
 # A semi-compatible DSL for the Bundler Gemfile and Isolate gem dependencies
 # files.
@@ -174,7 +175,7 @@ class Gem::RequestSet::GemDependencyAPI
   ##
   # A Hash containing gem names and files to require from those gems.
 
-  attr_reader :requires # :nodoc:
+  attr_reader :requires
 
   ##
   # A set of gems that are loaded via the +:path+ option to #gem
@@ -367,11 +368,11 @@ class Gem::RequestSet::GemDependencyAPI
 
     @dependencies[name] =
       if requirements.empty? and not source_set then
-        nil
+        Gem::Requirement.default
       elsif source_set then
-        '!'
+        Gem::Requirement.source_set
       else
-        requirements
+        Gem::Requirement.create requirements
       end
 
     return unless gem_platforms options
@@ -396,7 +397,7 @@ Gem dependencies file #{@path} requires #{name} more than once.
   ##
   # Handles the git: option from +options+ for gem +name+.
   #
-  # Returns +true+ if the path option was handled.
+  # Returns +true+ if the gist or git option was handled.
 
   def gem_git name, options # :nodoc:
     if gist = options.delete(:gist) then
@@ -601,7 +602,7 @@ Gem dependencies file #{@path} requires #{name} more than once.
     add_dependencies groups, [self_dep]
     add_dependencies groups, spec.runtime_dependencies
 
-    @dependencies[spec.name] = '!'
+    @dependencies[spec.name] = Gem::Requirement.source_set
 
     spec.dependencies.each do |dep|
       @dependencies[dep.name] = dep.requirement

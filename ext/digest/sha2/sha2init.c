@@ -1,10 +1,12 @@
 /* $RoughId: sha2init.c,v 1.3 2001/07/13 20:00:43 knu Exp $ */
-/* $Id: sha2init.c 52739 2015-11-24 15:28:43Z nagachika $ */
+/* $Id: sha2init.c 52694 2015-11-21 04:35:57Z naruse $ */
 
 #include <ruby/ruby.h>
 #include "../digest.h"
 #if defined(SHA2_USE_OPENSSL)
 #include "sha2ossl.h"
+#elif defined(SHA2_USE_COMMONDIGEST)
+#include "sha2cc.h"
 #else
 #include "sha2.h"
 #endif
@@ -42,7 +44,7 @@ Init_sha2(void)
 
     rb_require("digest");
 
-    id_metadata = rb_intern("metadata");
+    id_metadata = rb_intern_const("metadata");
 
     mDigest = rb_path2class("Digest");
     cDigest_Base = rb_path2class("Digest::Base");

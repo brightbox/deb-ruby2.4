@@ -1,5 +1,6 @@
+# frozen_string_literal: false
 #
-# $Id: config.rb 47902 2014-10-13 08:53:16Z hsbt $
+# $Id: config.rb 53141 2015-12-16 05:07:31Z naruse $
 # Configuration file for XML-RPC for Ruby
 #
 
