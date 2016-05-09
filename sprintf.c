@@ -2,7 +2,7 @@
 
   sprintf.c -
 
-  $Author: nobu $
+  $Author: nagachika $
   created at: Fri Oct 15 10:39:26 JST 1993
 
   Copyright (C) 1993-2007 Yukihiro Matsumoto
@@ -1067,7 +1067,7 @@ rb_str_format(int argc, const VALUE *argv, VALUE fmt)
 		}
 		val = rb_obj_as_string(num);
 		len = RSTRING_LEN(val) + zero;
-		if (prec >= len) ++len; /* integer part 0 */
+		if (prec >= len) len = prec + 1; /* integer part 0 */
 		if (sign || (flags&FSPACE)) ++len;
 		if (prec > 0) ++len; /* period */
 		CHECK(len > width ? len : width);

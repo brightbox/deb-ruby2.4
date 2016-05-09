@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.homepage = "https://github.com/yuki24/did_you_mean"
   s.licenses = ["MIT"]
   s.required_ruby_version = Gem::Requirement.new(">= 2.3.0dev")
-  s.rubygems_version = "2.5.0"
+  s.rubygems_version = "2.4.5"
   s.summary = "\"Did you mean?\" experience in Ruby"
   s.test_files = ["test/core_ext/name_error_extension_test.rb", "test/correctable/class_name_test.rb", "test/correctable/method_name_test.rb", "test/correctable/uncorrectable_name_test.rb", "test/correctable/variable_name_test.rb", "test/edit_distance/jaro_winkler_test.rb", "test/extra_features/initializer_name_correction_test.rb", "test/extra_features/method_name_checker_test.rb", "test/spell_checker_test.rb", "test/test_helper.rb", "test/verbose_formatter_test.rb"]
 
