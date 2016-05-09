@@ -2,7 +2,7 @@
 
   object.c -
 
-  $Author: shugo $
+  $Author: naruse $
   created at: Thu Jul 15 12:01:24 JST 1993
 
   Copyright (C) 1993-2007 Yukihiro Matsumoto
@@ -2142,7 +2142,7 @@ rb_mod_const_get(int argc, VALUE *argv, VALUE mod)
 		continue;
 	    }
 	    else {
-		rb_name_err_raise("uninitialized constant %2$s::%1$s", mod, part);
+		rb_mod_const_missing(mod, part);
 	    }
 	}
 	if (!rb_is_const_id(id)) {

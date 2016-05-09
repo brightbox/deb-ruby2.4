@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.homepage = "https://github.com/seattlerb/minitest"
   s.licenses = ["MIT"]
   s.rdoc_options = ["--main", "README.rdoc"]
-  s.rubygems_version = "2.5.0"
+  s.rubygems_version = "2.4.5"
   s.summary = "minitest provides a complete suite of testing facilities supporting TDD, BDD, mocking, and benchmarking"
 
   if s.respond_to? :specification_version then

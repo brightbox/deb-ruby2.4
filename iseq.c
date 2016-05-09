@@ -2,7 +2,7 @@
 
   iseq.c -
 
-  $Author: nobu $
+  $Author: naruse $
   created at: 2006-07-11(Tue) 09:00:03 +0900
 
   Copyright (C) 2006 Koichi Sasada
@@ -113,6 +113,7 @@ rb_iseq_mark(const rb_iseq_t *iseq)
 	rb_gc_mark(body->location.base_label);
 	rb_gc_mark(body->location.path);
 	RUBY_MARK_UNLESS_NULL(body->location.absolute_path);
+	RUBY_MARK_UNLESS_NULL((VALUE)body->parent_iseq);
     }
 
     if (FL_TEST(iseq, ISEQ_NOT_LOADED_YET)) {

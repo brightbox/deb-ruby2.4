@@ -3099,6 +3099,8 @@ case "$build_os" in #(
     : ${CXX=g++} ;; #(
   xcc|x/usr/bin/cc) :
     : ${CXX=c++} ;; #(
+  xicc) :
+    : ${CXX=icpc} ;; #(
   xclang|x/usr/bin/clang) :
     : ${CXX=clang++} ;; #(
   *) :
@@ -7512,7 +7514,7 @@ $as_echo_n "checking whether LDFLAGS is valid... " >&6; }
 	cp ../confdefs.h . &&
 	echo '<?xml?><plist><dict><key>CFBundleIdentifier</key><string></string></dict></plist>' > Info.plist &&
 	:
-    } || as_fn_error $? "faild to make temporary directory" "$LINENO" 5
+    } || as_fn_error $? "failed to make temporary directory" "$LINENO" 5
     cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
@@ -7575,6 +7577,7 @@ if test "$GCC:${warnflags+set}:no" = yes::no; then
 	extra_warning="$extra_warning -Wno-maybe-uninitialized"
     fi
     for wflag in -Wno-unused-parameter -Wno-parentheses -Wno-long-long \
+                 -diag-disable=2259 \
 		 -Wno-missing-field-initializers \
 		 -Wunused-variable \
 		 -Werror=pointer-arith \
@@ -8567,7 +8570,7 @@ esac
 esac
 
     # disable fast-math
-    for oflag in -fno-fast-math; do
+    for oflag in -fno-fast-math -fp-model\ precise; do
 
     { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether $oflag is accepted as CFLAGS" >&5
 $as_echo_n "checking whether $oflag is accepted as CFLAGS... " >&6; }
@@ -9171,6 +9174,10 @@ esac
 		# isinf() and isnan() are macros on DragonFly.
 		ac_cv_func_isinf=yes
 		ac_cv_func_isnan=yes
+		 ;; #(
+  aix*) :
+    	LIBS="-lm $LIBS"
+		ac_cv_func_round=no
 		 ;; #(
   nacl) :
 
@@ -20634,6 +20641,66 @@ if test "x$rb_cv_atan2_inf_c99" = xyes; then :
 
 fi
 
+if test "x$ac_cv_func_lgamma_r" = xyes; then :
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether lgamma_r handles -0.0" >&5
+$as_echo_n "checking whether lgamma_r handles -0.0... " >&6; }
+if ${rb_cv_lgamma_r_m0+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+	if test "$cross_compiling" = yes; then :
+  rb_cv_lgamma_r_m0=yes
+
+else
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+#include <math.h>
+#ifdef HAVE_UNISTD_H
+#include <unistd.h>
+#endif
+#ifndef EXIT_SUCCESS
+#define EXIT_SUCCESS 0
+#endif
+#ifndef EXIT_FAILURE
+#define EXIT_FAILURE 1
+#endif
+
+int
+main(int argc, char **argv)
+{
+    int sign;
+    double x = lgamma_r(-0.0, &sign);
+
+    /* should be [+inf, -1] */
+    if (x <= 0) return EXIT_FAILURE;
+    if (!isinf(x)) return EXIT_FAILURE;
+    if (sign != -1) return EXIT_FAILURE;
+    return EXIT_SUCCESS;
+}
+
+_ACEOF
+if ac_fn_c_try_run "$LINENO"; then :
+  rb_cv_lgamma_r_m0=yes
+else
+  rb_cv_lgamma_r_m0=no
+fi
+rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
+  conftest.$ac_objext conftest.beam conftest.$ac_ext
+fi
+
+
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $rb_cv_lgamma_r_m0" >&5
+    colorize_result "$rb_cv_lgamma_r_m0" ; }
+    if test "x$rb_cv_lgamma_r_m0" = xno; then :
+  $as_echo "#define LGAMMA_R_M0_FIX 1" >>confdefs.h
+
+fi
+
+fi
+
 # Some platform need -lrt for clock_gettime, but the other don't.
 if test x"$ac_cv_func_clock_gettime" != xyes; then
     # glibc 2.17 moves clock_* functions from librt to the main C library.
@@ -24971,7 +25038,7 @@ guard=INCLUDE_RUBY_CONFIG_H
 (
   if test "x$CONFIGURE_TTY" = xyes; then color=--color; else color=; fi
   exec ${srcdir}/tool/ifchange $color "${config_h}" -
-)
+) || as_fn_error $? "failed to create ${config_h}" "$LINENO" 5
 tr -d '\015' < largefile.h > confdefs.h
 rm largefile.h
 

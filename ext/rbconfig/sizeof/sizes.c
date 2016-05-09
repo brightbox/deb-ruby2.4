@@ -6,7 +6,7 @@ Init_sizeof(void)
     VALUE s = rb_hash_new();
     rb_define_const(rb_define_module("RbConfig"), "SIZEOF", s);
 
-#define DEFINE(type, size) rb_hash_aset(s, rb_str_new_cstr(#type), INT2FIX(SIZEOF_##size));
+#define DEFINE(type, size) rb_hash_aset(s, rb_str_new_cstr(#type), INT2FIX(SIZEOF_##size))
 
 #if SIZEOF_INT != 0
     DEFINE(int, INT);
