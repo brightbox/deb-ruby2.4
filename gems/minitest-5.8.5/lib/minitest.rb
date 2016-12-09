@@ -7,7 +7,7 @@ require "minitest/parallel"
 # :include: README.rdoc
 
 module Minitest
-  VERSION = "5.8.3" # :nodoc:
+  VERSION = "5.8.5" # :nodoc:
   ENCS = "".respond_to? :encoding # :nodoc:
 
   @@installed_at_exit ||= false
@@ -139,9 +139,6 @@ module Minitest
   ##
   # Internal run method. Responsible for telling all Runnable
   # sub-classes to run.
-  #
-  # NOTE: this method is redefined in parallel_each.rb, which is
-  # loaded if a Runnable calls parallelize_me!.
 
   def self.__run reporter, options
     suites = Runnable.runnables.shuffle

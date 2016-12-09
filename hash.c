@@ -2,7 +2,7 @@
 
   hash.c -
 
-  $Author: ngoto $
+  $Author: nagachika $
   created at: Mon Nov 22 18:51:18 JST 1993
 
   Copyright (C) 1993-2007 Yukihiro Matsumoto
@@ -152,6 +152,10 @@ any_hash(VALUE a, st_index_t (*other_func)(VALUE))
     }
     else if (BUILTIN_TYPE(a) == T_SYMBOL) {
 	hnum = RSYMBOL(a)->hashval;
+    }
+    else if (BUILTIN_TYPE(a) == T_BIGNUM) {
+	hval = rb_big_hash(a);
+	hnum = FIX2LONG(hval);
     }
     else if (BUILTIN_TYPE(a) == T_FLOAT) {
       flt:
