@@ -1,6 +1,7 @@
-ruby2.3 (2.3.3-1bbox1~trusty1) trusty; urgency=low
+ruby2.3 (2.3.3-1bbox1~yakkety2) yakkety; urgency=low
 
   * New upstream release, 2.3.3
+  * Remove testrb references, doesn't exist in ruby2.3
 
  -- John Leach <john@brightbox.co.uk>  Fri, 09 Dec 2016 14:41:17 +0000
 
