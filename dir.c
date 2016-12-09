@@ -2,7 +2,7 @@
 
   dir.c -
 
-  $Author: naruse $
+  $Author: nagachika $
   created at: Wed Jan  5 09:51:01 JST 1994
 
   Copyright (C) 1993-2007 Yukihiro Matsumoto
@@ -885,8 +885,8 @@ dir_rewind(VALUE dir)
  *  call-seq:
  *     dir.close -> nil
  *
- *  Closes the directory stream. Any further attempts to access
- *  <em>dir</em> will raise an <code>IOError</code>.
+ *  Closes the directory stream.
+ *  Calling this method on closed Dir object is ignored since Ruby 2.3.
  *
  *     d = Dir.new("testdir")
  *     d.close   #=> nil

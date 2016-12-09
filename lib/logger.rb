@@ -6,7 +6,7 @@
 # License::
 #   You can redistribute it and/or modify it under the same terms of Ruby's
 #   license; either the dual license version in 2003, or any later version.
-# Revision:: $Id: logger.rb 54362 2016-03-29 05:57:39Z naruse $
+# Revision:: $Id: logger.rb 56438 2016-10-17 17:38:53Z nagachika $
 #
 # A simple system for logging messages.  See Logger for more documentation.
 
@@ -209,7 +209,7 @@ require 'monitor'
 #
 class Logger
   VERSION = "1.2.7"
-  _, name, rev = %w$Id: logger.rb 54362 2016-03-29 05:57:39Z naruse $
+  _, name, rev = %w$Id: logger.rb 56438 2016-10-17 17:38:53Z nagachika $
   if name
     name = name.chomp(",v")
   else
@@ -593,8 +593,8 @@ private
       when 'weekly'
         t = Time.mktime(now.year, now.month, now.mday) + SiD * (7 - now.wday)
       when 'monthly'
-        t = Time.mktime(now.year, now.month, 1) + SiD * 31
-        return Time.mktime(t.year, t.month, 1) if t.mday > 1
+        t = Time.mktime(now.year, now.month, 1) + SiD * 32
+        return Time.mktime(t.year, t.month, 1)
       else
         return now
       end

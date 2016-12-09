@@ -2,7 +2,7 @@
 #
 # tempfile - manipulates temporary files
 #
-# $Id: tempfile.rb 53141 2015-12-16 05:07:31Z naruse $
+# $Id: tempfile.rb 56858 2016-11-21 07:56:47Z nagachika $
 #
 
 require 'delegate'
@@ -80,7 +80,7 @@ require 'tmpdir'
 # mutex.
 class Tempfile < DelegateClass(File)
   # call-seq:
-  #    new(basename, [tmpdir = Dir.tmpdir], [options])
+  #    new(basename = "", [tmpdir = Dir.tmpdir], [options])
   #
   # Creates a temporary file with permissions 0600 (= only readable and
   # writable by the owner) and opens it with mode "w+".
