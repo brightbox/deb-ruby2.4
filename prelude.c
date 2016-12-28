@@ -12,7 +12,8 @@
 static const char prelude_name0[] = "<internal:prelude>";
 static const char prelude_code0[] =
 "class Thread\n"
-"  MUTEX_FOR_THREAD_EXCLUSIVE = Mutex.new\n"
+"  MUTEX_FOR_THREAD_EXCLUSIVE = Thread::Mutex.new\n"
+"  private_constant :MUTEX_FOR_THREAD_EXCLUSIVE\n"
 "\n"
 "\n"
 "\n"
@@ -21,7 +22,7 @@ static const char prelude_code0[] =
 "\n"
 "\n"
 "  def self.exclusive\n"
-"    warn \"Thread.exclusive is deprecated, use Mutex\", caller\n"
+"    warn \"Thread.exclusive is deprecated, use Thread::Mutex\", caller\n"
 "    MUTEX_FOR_THREAD_EXCLUSIVE.synchronize{\n"
 "      yield\n"
 "    }\n"
@@ -160,8 +161,9 @@ static const char prelude_code2[] =
 "if defined?(Gem)\n"
 "  require 'rubygems.rb'\n"
 "  begin\n"
+"    gem 'did_you_mean'\n"
 "    require 'did_you_mean'\n"
-"  rescue LoadError\n"
+"  rescue Gem::LoadError, LoadError\n"
 "  end if defined?(DidYouMean)\n"
 "end\n"
 ;
@@ -173,14 +175,14 @@ prelude_eval(VALUE code, VALUE name, int line)
     static const rb_compile_option_t optimization = {
 	TRUE, /* int inline_const_cache; */
 	TRUE, /* int peephole_optimization; */
-	TRUE, /* int tailcall_optimization */
+	TRUE, /* int tailcall_optimization; */
 	TRUE, /* int specialized_instruction; */
 	TRUE, /* int operands_unification; */
 	TRUE, /* int instructions_unification; */
 	TRUE, /* int stack_caching; */
-	FALSE, /* int trace_instruction */
-	TRUE,
-	FALSE,
+	FALSE, /* int trace_instruction; */
+	TRUE, /* int frozen_string_literal; */
+	FALSE, /* int debug_frozen_string_literal; */
     };
 
     NODE *node = rb_parser_compile_string_path(rb_parser_new(), name, code, line);

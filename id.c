@@ -66,6 +66,8 @@ Init_id(void)
 #define rb_intern(str) rb_intern_const(str)
     rb_encoding *enc = rb_usascii_encoding();
 
+    REGISTER_SYMID(idMax, "max");
+    REGISTER_SYMID(idMin, "min");
     REGISTER_SYMID(idFreeze, "freeze");
     REGISTER_SYMID(idInspect, "inspect");
     REGISTER_SYMID(idIntern, "intern");
@@ -125,4 +127,6 @@ Init_id(void)
     REGISTER_SYMID(id_core_hash_merge_ary, "core#hash_merge_ary");
     REGISTER_SYMID(id_core_hash_merge_ptr, "core#hash_merge_ptr");
     REGISTER_SYMID(id_core_hash_merge_kwd, "core#hash_merge_kwd");
+    REGISTER_SYMID(idLASTLINE, "$_");
+    REGISTER_SYMID(idBACKREF, "$~");
 }
