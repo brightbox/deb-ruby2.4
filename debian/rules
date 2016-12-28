@@ -59,7 +59,7 @@ override_dh_auto_install-arch:
 	$(RM) $(CURDIR)/debian/tmp/usr/lib/ruby/2.4.0/rdoc/generator/template/darkfish/js/jquery.js
 	dh_link -plibruby2.4 /usr/share/javascript/jquery/jquery.min.js /usr/lib/ruby/2.4.0/rdoc/generator/template/darkfish/js/jquery.js
 	# remove embedded SSL certificates (replaced using ca-certificates via rubygems-integration)
-	$(RM) $(CURDIR)/debian/tmp/usr/lib/ruby/2.4.0/rubygems/ssl_certs/*
+	$(RM) -r $(CURDIR)/debian/tmp/usr/lib/ruby/2.4.0/rubygems/ssl_certs/*
 	# sanity check
 	debian/sanity_check
 
