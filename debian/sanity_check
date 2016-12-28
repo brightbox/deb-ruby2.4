@@ -35,7 +35,8 @@ should_not_exist  ${libdir}/libruby-2.4.so.2.4
 should_exist      ${archlibdir}/libruby-2.4.so.2.4
 should_not_exist  ${libdir}/pkgconfig/ruby-2.4.pc
 should_exist      ${archlibdir}/pkgconfig/ruby-2.4.pc
-should_exist      ${libdir}/ruby/gems/2.4.0/specifications/default/json-1.8.3.gemspec
+should_exist      ${libdir}/ruby/gems/2.4.0/specifications/default/json-2.0.2.gemspec
+should_exist      ${libdir}/ruby/gems/2.4.0/specifications/default/openssl-2.0.2.gemspec
 
 
 echo
