@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.email = ["hsbt@ruby-lang.org"]
   s.files = [".gitignore", ".travis.yml", "Gemfile", "LICENSE.txt", "README.md", "Rakefile", "bin/console", "bin/setup", "lib/net-telnet.rb", "lib/net/telnet.rb", "lib/net/telnet/version.rb", "net-telnet.gemspec"]
   s.homepage = "https://github.com/ruby/net-telnet"
-  s.rubygems_version = "2.4.5"
+  s.rubygems_version = "2.5.1"
   s.summary = "Provides telnet client functionality."
 
   if s.respond_to? :specification_version then

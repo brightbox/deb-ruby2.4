@@ -2,7 +2,7 @@
 #
 # tmpdir - retrieve temporary directory path
 #
-# $Id: tmpdir.rb 52526 2015-11-10 11:48:14Z akr $
+# $Id: tmpdir.rb 53945 2016-02-26 02:11:14Z hsbt $
 #
 
 require 'fileutils'
@@ -82,7 +82,7 @@ class Dir
   #    FileUtils.remove_entry dir
   #  end
   #
-  def Dir.mktmpdir(prefix_suffix=nil, *rest)
+  def self.mktmpdir(prefix_suffix=nil, *rest)
     path = Tmpname.create(prefix_suffix || "d", *rest) {|n| mkdir(n, 0700)}
     if block_given?
       begin
