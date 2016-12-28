@@ -28,9 +28,8 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  nurat_canonicalization@Base 2.3.0
  onig_add_end_call@Base 2.3.0
  onig_bbuf_init@Base 2.3.0
- onig_chain_link_add@Base 2.3.0
- onig_chain_reduce@Base 2.3.0
  onig_compile@Base 2.3.0
+ onig_compile_ruby@Base 2.4.0
  onig_copy_encoding@Base 2.3.0
  onig_copy_syntax@Base 2.3.0
  onig_end@Base 2.3.0
@@ -39,19 +38,19 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  onig_foreach_name@Base 2.3.0
  onig_free@Base 2.3.0
  onig_free_body@Base 2.3.0
- onig_free_node_list@Base 2.3.0
- onig_free_shared_cclass_table@Base 2.3.0
  onig_get_case_fold_flag@Base 2.3.0
  onig_get_default_case_fold_flag@Base 2.3.0
  onig_get_encoding@Base 2.3.0
  onig_get_match_stack_limit_size@Base 2.3.0
  onig_get_options@Base 2.3.0
+ onig_get_parse_depth_limit@Base 2.4.0
  onig_get_syntax@Base 2.3.0
  onig_get_syntax_behavior@Base 2.3.0
  onig_get_syntax_op2@Base 2.3.0
  onig_get_syntax_op@Base 2.3.0
  onig_get_syntax_options@Base 2.3.0
  onig_init@Base 2.3.0
+ onig_initialize@Base 2.4.0
  onig_is_code_in_cc@Base 2.3.0
  onig_is_code_in_cc_len@Base 2.3.0
  onig_is_in_code_range@Base 2.3.0
@@ -62,7 +61,6 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  onig_names_free@Base 2.3.0
  onig_new@Base 2.3.0
  onig_new_without_alloc@Base 2.3.0
- onig_node_conv_to_str_node@Base 2.3.0
  onig_node_free@Base 2.3.0
  onig_node_list_add@Base 2.3.0
  onig_node_new_alt@Base 2.3.0
@@ -90,6 +88,7 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  onig_region_resize@Base 2.3.0
  onig_region_set@Base 2.3.0
  onig_renumber_name_table@Base 2.3.0
+ onig_scan@Base 2.4.0
  onig_scan_env_set_error_string@Base 2.3.0
  onig_scan_unsigned_number@Base 2.3.0
  onig_search@Base 2.3.0
@@ -98,19 +97,18 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  onig_set_default_syntax@Base 2.3.0
  onig_set_match_stack_limit_size@Base 2.3.0
  onig_set_meta_char@Base 2.3.0
+ onig_set_parse_depth_limit@Base 2.4.0
  onig_set_syntax_behavior@Base 2.3.0
  onig_set_syntax_op2@Base 2.3.0
  onig_set_syntax_op@Base 2.3.0
  onig_set_syntax_options@Base 2.3.0
  onig_set_verb_warn_func@Base 2.3.0
  onig_set_warn_func@Base 2.3.0
- onig_snprintf_with_pattern@Base 2.3.0
  onig_st_init_strend_table_with_size@Base 2.3.0
  onig_st_insert_strend@Base 2.3.0
  onig_st_lookup_strend@Base 2.3.0
  onig_strcpy@Base 2.3.0
- onig_strncmp@Base 2.3.0
- onig_transfer@Base 2.3.0
+ onig_vsnprintf_with_pattern@Base 2.4.0
  onigenc_always_false_is_allowed_reverse_match@Base 2.3.0
  onigenc_always_true_is_allowed_reverse_match@Base 2.3.0
  onigenc_apply_all_case_fold_with_map@Base 2.3.0
@@ -118,6 +116,7 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  onigenc_ascii_get_case_fold_codes_by_str@Base 2.3.0
  onigenc_ascii_is_code_ctype@Base 2.3.0
  onigenc_ascii_mbc_case_fold@Base 2.3.0
+ onigenc_ascii_only_case_map@Base 2.4.0
  onigenc_get_case_fold_codes_by_str_with_map@Base 2.3.0
  onigenc_get_default_encoding@Base 2.3.0
  onigenc_get_left_adjust_char_head@Base 2.3.0
@@ -137,10 +136,8 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  onigenc_mbn_mbc_to_code@Base 2.3.0
  onigenc_minimum_property_name_to_ctype@Base 2.3.0
  onigenc_not_support_get_ctype_code_range@Base 2.3.0
- onigenc_property_list_add_property@Base 2.3.0
- onigenc_property_list_init@Base 2.3.0
- onigenc_set_default_caseconv_table@Base 2.3.0
  onigenc_set_default_encoding@Base 2.3.0
+ onigenc_single_byte_ascii_only_case_map@Base 2.4.0
  onigenc_single_byte_code_to_mbc@Base 2.3.0
  onigenc_single_byte_code_to_mbclen@Base 2.3.0
  onigenc_single_byte_left_adjust_char_head@Base 2.3.0
@@ -152,6 +149,7 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  onigenc_strlen@Base 2.3.0
  onigenc_strlen_null@Base 2.3.0
  onigenc_unicode_apply_all_case_fold@Base 2.3.0
+ onigenc_unicode_case_map@Base 2.4.0
  onigenc_unicode_ctype_code_range@Base 2.3.0
  onigenc_unicode_get_case_fold_codes_by_str@Base 2.3.0
  onigenc_unicode_is_code_ctype@Base 2.3.0
@@ -175,6 +173,7 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  rb_alias@Base 2.3.0
  rb_alias_variable@Base 2.3.0
  rb_alloc_tmp_buffer@Base 2.3.0
+ rb_alloc_tmp_buffer_with_count@Base 2.4.0
  rb_any_to_s@Base 2.3.0
  rb_apply@Base 2.3.0
  rb_argv0@Base 2.3.0
@@ -248,7 +247,6 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  rb_big_divrem_normal@Base 2.3.0
  rb_big_eq@Base 2.3.0
  rb_big_eql@Base 2.3.0
- rb_big_hash@Base 2.3.3
  rb_big_idiv@Base 2.3.0
  rb_big_lshift@Base 2.3.0
  rb_big_minus@Base 2.3.0
@@ -267,6 +265,7 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  rb_big_pow@Base 2.3.0
  rb_big_resize@Base 2.3.0
  rb_big_rshift@Base 2.3.0
+ rb_big_sign@Base 2.4.0
  rb_big_sq_fast@Base 2.3.0
  rb_big_unpack@Base 2.3.0
  rb_big_xor@Base 2.3.0
@@ -281,7 +280,6 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  rb_bug_reporter_add@Base 2.3.0
  rb_cArray@Base 2.3.0
  rb_cBasicObject@Base 2.3.0
- rb_cBignum@Base 2.3.0
  rb_cBinding@Base 2.3.0
  rb_cClass@Base 2.3.0
  rb_cComplex@Base 2.3.0
@@ -289,10 +287,8 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  rb_cDir@Base 2.3.0
  rb_cEncoding@Base 2.3.0
  rb_cEnumerator@Base 2.3.0
- rb_cEnv@Base 2.3.0
  rb_cFalseClass@Base 2.3.0
  rb_cFile@Base 2.3.0
- rb_cFixnum@Base 2.3.0
  rb_cFloat@Base 2.3.0
  rb_cHash@Base 2.3.0
  rb_cIO@Base 2.3.0
@@ -343,9 +339,7 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  rb_check_type@Base 2.3.0
  rb_check_typeddata@Base 2.3.0
  rb_class2name@Base 2.3.0
- rb_class_boot@Base 2.3.0
  rb_class_get_superclass@Base 2.3.0
- rb_class_inherited@Base 2.3.0
  rb_class_inherited_p@Base 2.3.0
  rb_class_instance_methods@Base 2.3.0
  rb_class_ivar_set@Base 2.3.0
@@ -681,6 +675,7 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  rb_funcallv@Base 2.3.0
  rb_funcallv_public@Base 2.3.0
  rb_gc@Base 2.3.0
+ rb_gc_adjust_memory_usage@Base 2.4.0
  rb_gc_call_finalizer_at_exit@Base 2.3.0
  rb_gc_copy_finalizer@Base 2.3.0
  rb_gc_count@Base 2.3.0
@@ -692,7 +687,6 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  rb_gc_free_node@Base 2.3.0
  rb_gc_latest_gc_info@Base 2.3.0
  rb_gc_mark@Base 2.3.0
- rb_gc_mark_global_tbl@Base 2.3.0
  rb_gc_mark_locations@Base 2.3.0
  rb_gc_mark_maybe@Base 2.3.0
  rb_gc_mark_node@Base 2.3.0
@@ -761,7 +755,6 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  rb_id_attrset@Base 2.3.0
  rb_ident_hash_new@Base 2.3.0
  rb_imemo_new@Base 2.3.0
- rb_include_class_new@Base 2.3.0
  rb_include_module@Base 2.3.0
  rb_insecure_operation@Base 2.3.0
  rb_inspect@Base 2.3.0
@@ -825,11 +818,6 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  rb_is_instance_id@Base 2.3.0
  rb_is_junk_id@Base 2.3.0
  rb_is_local_id@Base 2.3.0
- rb_isalnum@Base 2.3.0
- rb_isalpha@Base 2.3.0
- rb_isblank@Base 2.3.0
- rb_iscntrl@Base 2.3.0
- rb_isdigit@Base 2.3.0
  rb_iseq_absolute_path@Base 2.3.0
  rb_iseq_add_mark_object@Base 2.3.0
  rb_iseq_base_label@Base 2.3.0
@@ -864,13 +852,6 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  rb_iseqw_line_trace_specify@Base 2.3.0
  rb_iseqw_new@Base 2.3.0
  rb_iseqw_to_iseq@Base 2.3.0
- rb_isgraph@Base 2.3.0
- rb_islower@Base 2.3.0
- rb_isprint@Base 2.3.0
- rb_ispunct@Base 2.3.0
- rb_isspace@Base 2.3.0
- rb_isupper@Base 2.3.0
- rb_isxdigit@Base 2.3.0
  rb_iter_break@Base 2.3.0
  rb_iter_break_value@Base 2.3.0
  rb_iterate@Base 2.3.0
@@ -911,7 +892,6 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  rb_mWaitWritable@Base 2.3.0
  rb_make_backtrace@Base 2.3.0
  rb_make_exception@Base 2.3.0
- rb_make_metaclass@Base 2.3.0
  rb_mark_generic_ivar@Base 2.3.0
  rb_mark_hash@Base 2.3.0
  rb_mark_set@Base 2.3.0
@@ -1105,6 +1085,7 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  rb_reg_adjust_startpos@Base 2.3.0
  rb_reg_alloc@Base 2.3.0
  rb_reg_backref_number@Base 2.3.0
+ rb_reg_fragment_setenc@Base 2.4.0
  rb_reg_init_str@Base 2.3.0
  rb_reg_last_match@Base 2.3.0
  rb_reg_match2@Base 2.3.0
@@ -1259,7 +1240,9 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  rb_struct_initialize@Base 2.3.0
  rb_struct_members@Base 2.3.0
  rb_struct_new@Base 2.3.0
+ rb_struct_ptr@Base 2.4.0
  rb_struct_s_members@Base 2.3.0
+ rb_struct_size@Base 2.4.0
  rb_sym2id@Base 2.3.0
  rb_sym2str@Base 2.3.0
  rb_sym_all_symbols@Base 2.3.0
@@ -1328,8 +1311,6 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  rb_to_id@Base 2.3.0
  rb_to_int@Base 2.3.0
  rb_to_symbol@Base 2.3.0
- rb_tolower@Base 2.3.0
- rb_toupper@Base 2.3.0
  rb_tracearg_binding@Base 2.3.0
  rb_tracearg_defined_class@Base 2.3.0
  rb_tracearg_event@Base 2.3.0
@@ -1356,6 +1337,7 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  rb_undef_alloc_func@Base 2.3.0
  rb_undef_method@Base 2.3.0
  rb_undefine_finalizer@Base 2.3.0
+ rb_unexpected_type@Base 2.4.0
  rb_update_max_fd@Base 2.3.0
  rb_usascii_encindex@Base 2.3.0
  rb_usascii_encoding@Base 2.3.0
@@ -1377,6 +1359,7 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  rb_wb_unprotected_newobj_of@Base 2.3.0
  rb_write_error2@Base 2.3.0
  rb_write_error@Base 2.3.0
+ rb_write_error_str@Base 2.4.0
  rb_yield@Base 2.3.0
  rb_yield_block@Base 2.3.0
  rb_yield_splat@Base 2.3.0
@@ -1411,6 +1394,7 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  ruby_init@Base 2.3.0
  ruby_init_ext@Base 2.3.0
  ruby_init_loadpath@Base 2.3.0
+ ruby_init_setproctitle@Base 2.4.0
  ruby_init_stack@Base 2.3.0
  ruby_malloc_size_overflow@Base 2.3.0
  ruby_native_thread_p@Base 2.3.0
