@@ -699,6 +699,7 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  rb_gc_verify_internal_consistency@Base 2.3.0
  rb_gc_writebarrier@Base 2.3.0
  rb_gc_writebarrier_unprotect@Base 2.3.0
+ rb_gcd@Base 2.4.1
  rb_gcd_gmp@Base 2.3.0
  rb_gcd_normal@Base 2.3.0
  rb_generic_ivar_memsize@Base 2.3.0
