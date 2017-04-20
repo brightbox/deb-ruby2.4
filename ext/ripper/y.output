@@ -8,7 +8,7 @@ Grammar
 
     0 $accept: program "end-of-input"
 
-    1 $@1: /* empty */
+    1 $@1: %empty
 
     2 program: $@1 top_compstmt
 
@@ -21,7 +21,7 @@ Grammar
 
     8 top_stmt: stmt
 
-    9 $@2: /* empty */
+    9 $@2: %empty
 
    10 top_stmt: keyword_BEGIN $@2 '{' top_compstmt '}'
 
@@ -36,11 +36,11 @@ Grammar
 
    17 stmt_or_begin: stmt
 
-   18 $@3: /* empty */
+   18 $@3: %empty
 
    19 stmt_or_begin: keyword_BEGIN $@3 '{' top_compstmt '}'
 
-   20 $@4: /* empty */
+   20 $@4: %empty
 
    21 stmt: keyword_alias fitem $@4 fitem
    22     | keyword_alias tGVAR tGVAR
@@ -87,7 +87,7 @@ Grammar
    57 block_command: block_call
    58              | block_call call_op2 operation2 command_args
 
-   59 @5: /* empty */
+   59 @5: %empty
 
    60 cmd_brace_block: "{ arg" @5 brace_body '}'
 
@@ -172,7 +172,7 @@ Grammar
 
   125 undef_list: fitem
 
-  126 $@6: /* empty */
+  126 $@6: %empty
 
   127 undef_list: undef_list ',' $@6 fitem
 
@@ -289,7 +289,7 @@ Grammar
   236    | arg "&&" arg
   237    | arg "||" arg
 
-  238 $@7: /* empty */
+  238 $@7: %empty
 
   239 arg: keyword_defined opt_nl $@7 arg
   240    | arg '?' arg opt_nl ':' arg
@@ -322,7 +322,7 @@ Grammar
   260          | args ',' assocs opt_block_arg
   261          | block_arg
 
-  262 @8: /* empty */
+  262 @8: %empty
 
   263 command_args: @8 call_args
 
@@ -355,17 +355,17 @@ Grammar
   285        | backref
   286        | tFID
 
-  287 @9: /* empty */
+  287 @9: %empty
 
   288 primary: k_begin @9 bodystmt k_end
 
-  289 $@10: /* empty */
+  289 $@10: %empty
 
   290 primary: "( arg" $@10 rparen
 
-  291 $@11: /* empty */
+  291 $@11: %empty
 
-  292 $@12: /* empty */
+  292 $@12: %empty
 
   293 primary: "( arg" $@11 stmt $@12 rparen
   294        | "(" compstmt ')'
@@ -378,7 +378,7 @@ Grammar
   301        | keyword_yield '(' rparen
   302        | keyword_yield
 
-  303 $@13: /* empty */
+  303 $@13: %empty
 
   304 primary: keyword_defined opt_nl '(' $@13 expr rparen
   305        | keyword_not '(' expr rparen
@@ -390,47 +390,47 @@ Grammar
   311        | k_if expr_value then compstmt if_tail k_end
   312        | k_unless expr_value then compstmt opt_else k_end
 
-  313 $@14: /* empty */
+  313 $@14: %empty
 
-  314 $@15: /* empty */
+  314 $@15: %empty
 
   315 primary: k_while $@14 expr_value do $@15 compstmt k_end
 
-  316 $@16: /* empty */
+  316 $@16: %empty
 
-  317 $@17: /* empty */
+  317 $@17: %empty
 
   318 primary: k_until $@16 expr_value do $@17 compstmt k_end
   319        | k_case expr_value opt_terms case_body k_end
   320        | k_case opt_terms case_body k_end
 
-  321 $@18: /* empty */
+  321 $@18: %empty
 
-  322 $@19: /* empty */
+  322 $@19: %empty
 
   323 primary: k_for for_var keyword_in $@18 expr_value do $@19 compstmt k_end
 
-  324 @20: /* empty */
+  324 @20: %empty
 
   325 primary: k_class cpath superclass @20 bodystmt k_end
 
-  326 @21: /* empty */
+  326 @21: %empty
 
   327 primary: k_class "<<" expr @21 term bodystmt k_end
 
-  328 @22: /* empty */
+  328 @22: %empty
 
   329 primary: k_module cpath @22 bodystmt k_end
 
-  330 @23: /* empty */
+  330 @23: %empty
 
-  331 @24: /* empty */
+  331 @24: %empty
 
   332 primary: k_def fname @23 @24 f_arglist bodystmt k_end
 
-  333 @25: /* empty */
+  333 @25: %empty
 
-  334 @26: /* empty */
+  334 @26: %empty
 
   335 primary: k_def singleton dot_or_colon @25 fname @26 f_arglist bodystmt k_end
   336        | keyword_break
@@ -500,7 +500,7 @@ Grammar
   379                | f_block_arg
 
   380 opt_block_args_tail: ',' block_args_tail
-  381                    | /* empty */
+  381                    | %empty
 
   382 block_param: f_arg ',' f_block_optarg ',' f_rest_arg opt_block_args_tail
   383            | f_arg ',' f_block_optarg ',' f_rest_arg ',' f_arg opt_block_args_tail
@@ -534,13 +534,13 @@ Grammar
   406 bvar: tIDENTIFIER
   407     | f_bad_arg
 
-  408 @27: /* empty */
+  408 @27: %empty
 
-  409 @28: /* empty */
+  409 @28: %empty
 
-  410 @29: /* empty */
+  410 @29: %empty
 
-  411 @30: /* empty */
+  411 @30: %empty
 
   412 lambda: @27 @28 f_larglist @29 @30 lambda_body
 
@@ -550,7 +550,7 @@ Grammar
   415 lambda_body: tLAMBEG compstmt '}'
   416            | keyword_do_LAMBDA compstmt k_end
 
-  417 @31: /* empty */
+  417 @31: %empty
 
   418 do_block: keyword_do_block @31 do_body keyword_end
 
@@ -561,43 +561,43 @@ Grammar
 
   423 method_call: fcall paren_args
 
-  424 @32: /* empty */
+  424 @32: %empty
 
   425 method_call: primary_value call_op operation2 @32 opt_paren_args
 
-  426 @33: /* empty */
+  426 @33: %empty
 
   427 method_call: primary_value "::" operation2 @33 paren_args
   428            | primary_value "::" operation3
 
-  429 @34: /* empty */
+  429 @34: %empty
 
   430 method_call: primary_value call_op @34 paren_args
 
-  431 @35: /* empty */
+  431 @35: %empty
 
   432 method_call: primary_value "::" @35 paren_args
   433            | keyword_super paren_args
   434            | keyword_super
   435            | primary_value '[' opt_call_args rbracket
 
-  436 @36: /* empty */
+  436 @36: %empty
 
   437 brace_block: '{' @36 brace_body '}'
 
-  438 @37: /* empty */
+  438 @37: %empty
 
   439 brace_block: keyword_do @37 do_body keyword_end
 
-  440 @38: /* empty */
+  440 @38: %empty
 
-  441 @39: /* empty */
+  441 @39: %empty
 
   442 brace_body: @38 @39 opt_block_param compstmt
 
-  443 @40: /* empty */
+  443 @40: %empty
 
-  444 @41: /* empty */
+  444 @41: %empty
 
   445 do_body: @40 @41 opt_block_param compstmt
 
@@ -638,7 +638,7 @@ Grammar
   468 words: tWORDS_BEG ' ' tSTRING_END
   469      | tWORDS_BEG word_list tSTRING_END
 
-  470 word_list: /* empty */
+  470 word_list: %empty
   471          | word_list word ' '
 
   472 word: string_content
@@ -647,7 +647,7 @@ Grammar
   474 symbols: tSYMBOLS_BEG ' ' tSTRING_END
   475        | tSYMBOLS_BEG symbol_list tSTRING_END
 
-  476 symbol_list: /* empty */
+  476 symbol_list: %empty
   477            | symbol_list word ' '
 
   478 qwords: tQWORDS_BEG ' ' tSTRING_END
@@ -656,36 +656,36 @@ Grammar
   480 qsymbols: tQSYMBOLS_BEG ' ' tSTRING_END
   481         | tQSYMBOLS_BEG qsym_list tSTRING_END
 
-  482 qword_list: /* empty */
+  482 qword_list: %empty
   483           | qword_list tSTRING_CONTENT ' '
 
-  484 qsym_list: /* empty */
+  484 qsym_list: %empty
   485          | qsym_list tSTRING_CONTENT ' '
 
-  486 string_contents: /* empty */
+  486 string_contents: %empty
   487                | string_contents string_content
 
-  488 xstring_contents: /* empty */
+  488 xstring_contents: %empty
   489                 | xstring_contents string_content
 
-  490 regexp_contents: /* empty */
+  490 regexp_contents: %empty
   491                | regexp_contents string_content
 
   492 string_content: tSTRING_CONTENT
 
-  493 @42: /* empty */
+  493 @42: %empty
 
   494 string_content: tSTRING_DVAR @42 string_dvar
 
-  495 @43: /* empty */
+  495 @43: %empty
 
-  496 @44: /* empty */
+  496 @44: %empty
 
-  497 @45: /* empty */
+  497 @45: %empty
 
-  498 @46: /* empty */
+  498 @46: %empty
 
-  499 @47: /* empty */
+  499 @47: %empty
 
   500 string_content: tSTRING_DBEG @43 @44 @45 @46 @47 compstmt tSTRING_DEND
 
@@ -734,14 +734,14 @@ Grammar
   533 backref: tNTH_REF
   534        | tBACK_REF
 
-  535 $@48: /* empty */
+  535 $@48: %empty
 
   536 superclass: '<' $@48 expr_value term
-  537           | /* empty */
+  537           | %empty
 
   538 f_arglist: '(' f_args rparen
 
-  539 @49: /* empty */
+  539 @49: %empty
 
   540 f_arglist: @49 f_args term
 
@@ -751,7 +751,7 @@ Grammar
   544          | f_block_arg
 
   545 opt_args_tail: ',' args_tail
-  546              | /* empty */
+  546              | %empty
 
   547 f_args: f_arg ',' f_optarg ',' f_rest_arg opt_args_tail
   548       | f_arg ',' f_optarg ',' f_rest_arg ',' f_arg opt_args_tail
@@ -767,7 +767,7 @@ Grammar
   558       | f_rest_arg opt_args_tail
   559       | f_rest_arg ',' f_arg opt_args_tail
   560       | args_tail
-  561       | /* empty */
+  561       | %empty
 
   562 f_bad_arg: tCONSTANT
   563          | tIVAR
@@ -831,7 +831,7 @@ Grammar
 
   601 singleton: var_ref
 
-  602 $@50: /* empty */
+  602 $@50: %empty
 
   603 singleton: '(' $@50 expr rparen
 
@@ -868,17 +868,17 @@ Grammar
   626 call_op2: call_op
   627         | "::"
 
-  628 opt_terms: /* empty */
+  628 opt_terms: %empty
   629          | terms
 
-  630 opt_nl: /* empty */
+  630 opt_nl: %empty
   631       | '\n'
 
   632 rparen: opt_nl ')'
 
   633 rbracket: opt_nl ']'
 
-  634 trailer: /* empty */
+  634 trailer: %empty
   635        | '\n'
   636        | ','
 
@@ -888,7 +888,7 @@ Grammar
   639 terms: term
   640      | terms ';'
 
-  641 none: /* empty */
+  641 none: %empty
 
 
 Terminals, with rules where they appear
