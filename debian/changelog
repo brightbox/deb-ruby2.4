@@ -1,3 +1,9 @@
+ruby2.4 (2.4.2-1bbox1~xenial1) xenial; urgency=medium
+
+  * New upstream release, 2.4.2
+
+ -- John Leach <john@brightbox.co.uk>  Mon, 18 Sep 2017 14:43:15 +0100
+
 ruby2.4 (2.4.1-1bbox1~xenial1) xenial; urgency=medium
 
   * New upstream release, 2.4.1
