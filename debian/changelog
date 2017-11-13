@@ -1,3 +1,9 @@
+ruby2.4 (2.4.2-1bbox1~xenial2) xenial; urgency=low
+
+  * Ignore explicit_bzero symbol to fix building on Artful
+
+ -- John Leach <john@brightbox.co.uk>  Mon, 13 Nov 2017 15:11:30 +0000
+
 ruby2.4 (2.4.2-1bbox1~xenial1) xenial; urgency=medium
 
   * New upstream release, 2.4.2
