@@ -23,7 +23,6 @@ libruby-2.4.so.2.4 libruby2.4 #MINVER#
  dln_find_exe_r@Base 2.3.0
  dln_find_file_r@Base 2.3.0
  dln_load@Base 2.3.0
- explicit_bzero@Base 2.3.0
  nucomp_canonicalization@Base 2.3.0
  nurat_canonicalization@Base 2.3.0
  onig_add_end_call@Base 2.3.0
