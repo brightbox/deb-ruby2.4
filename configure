@@ -5858,6 +5858,18 @@ fi
      ;;
 esac
 
+case "$target_os" in #(
+  darwin*) :
+
+if libtool 2>&1 | grep no_warning_for_no_symbols > /dev/null; then
+  ac_cv_prog_ac_ct_RANLIB=:
+  ac_cv_prog_ac_ct_AR='libtool -static'
+  rb_cv_arflags='-no_warning_for_no_symbols -o'
+fi
+ ;; #(
+  *) :
+     ;;
+esac
 if test -n "$ac_tool_prefix"; then
   # Extract the first word of "${ac_tool_prefix}ranlib", so it can be a program name with args.
 set dummy ${ac_tool_prefix}ranlib; ac_word=$2
@@ -6087,26 +6099,22 @@ done
 test -n "$AR" || AR="ar"
 
 fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $AR D option" >&5
-$as_echo_n "checking for $AR D option... " >&6; }
-if ${rb_cv_ar_D_option+:} false; then :
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $AR flags" >&5
+$as_echo_n "checking for $AR flags... " >&6; }
+if ${rb_cv_arflags+:} false; then :
   $as_echo_n "(cached) " >&6
 else
 
     if $AR rcD conftest.a > /dev/null 2>&1 && rm conftest.a; then :
-  rb_cv_ar_D_option=yes
+  rb_cv_arflags=rcD
 else
-  rb_cv_ar_D_option=no
+  rb_cv_arflags=rcu
 fi
 
 fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $rb_cv_ar_D_option" >&5
-    colorize_result "$rb_cv_ar_D_option" ; }
-if test "$rb_cv_ar_D_option" = yes; then :
-  ARFLAGS='rcD '
-else
-  ARFLAGS='rcu '
-fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $rb_cv_arflags" >&5
+    colorize_result "$rb_cv_arflags" ; }
+ARFLAGS="$rb_cv_arflags "
 
 
 if test -n "$ac_tool_prefix"; then
@@ -26478,21 +26486,21 @@ esac
 esac
 	# RUBY_APPEND_OPTION(XLDFLAGS)
 	case " ${XLDFLAGS-} " in #(
-  *" -framework CoreFoundation "*) :
+  *" -framework Foundation "*) :
      ;; #(
   '  ') :
-     XLDFLAGS="-framework CoreFoundation" ;; #(
+     XLDFLAGS="-framework Foundation" ;; #(
   *) :
-     XLDFLAGS="$XLDFLAGS -framework CoreFoundation" ;;
+     XLDFLAGS="$XLDFLAGS -framework Foundation" ;;
 esac
 	# RUBY_APPEND_OPTION(LIBRUBYARG_STATIC)
 	case " ${LIBRUBYARG_STATIC-} " in #(
-  *" -framework CoreFoundation "*) :
+  *" -framework Foundation "*) :
      ;; #(
   '  ') :
-     LIBRUBYARG_STATIC="-framework CoreFoundation" ;; #(
+     LIBRUBYARG_STATIC="-framework Foundation" ;; #(
   *) :
-     LIBRUBYARG_STATIC="$LIBRUBYARG_STATIC -framework CoreFoundation" ;;
+     LIBRUBYARG_STATIC="$LIBRUBYARG_STATIC -framework Foundation" ;;
 esac
 	 ;; #(
   osf*) :
