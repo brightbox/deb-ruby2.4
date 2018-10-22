@@ -1,3 +1,11 @@
+ruby2.4 (2.4.5-1bbox2~xenial1) xenial; urgency=medium
+
+  * New upstream release, 2.4.5.
+  * Fix baseruby detection for building on bionic
+  * Fixes CVE-2018-16396 and CVE-2018-16395.
+
+ -- John Leach <john@brightbox.co.uk>  Mon, 22 Oct 2018 19:50:31 +0100
+
 ruby2.4 (2.4.4-1bbox1~xenial1) xenial; urgency=medium
 
   * New upstream release, 2.4.4
