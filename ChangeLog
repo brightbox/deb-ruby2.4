@@ -1,7 +1,534 @@
 ------------------------------------------------------------------------
-r63013 | nagachika | 2018-03-28 23:08:00 +0900 (Wed, 28 Mar 2018) | 1 line
+r65137 | usa | 2018-10-18 00:34:55 +0900 (Thu, 18 Oct 2018) | 1 line
 
-add tag v2_4_4
+add tag v2_4_5
+------------------------------------------------------------------------
+r65134 | usa | 2018-10-18 00:30:28 +0900 (Thu, 18 Oct 2018) | 2 lines
+
+updated ext/openssl to 2.0.9
+
+------------------------------------------------------------------------
+r65129 | usa | 2018-10-18 00:08:59 +0900 (Thu, 18 Oct 2018) | 8 lines
+
+merge revision(s) 65125:
+
+	infect taint flag on Array#pack and String#unpack
+	with the directives "B", "b", "H" and "h".
+
+		* pack.c (pack_pack, pack_unpack_internal): infect taint flag.
+
+		* test/ruby/test_pack.rb: add test for above.
+------------------------------------------------------------------------
+r65118 | usa | 2018-10-17 18:25:11 +0900 (Wed, 17 Oct 2018) | 14 lines
+
+merge revision(s) 63067,63068: [Backport #14658]
+
+	Fix Kernel#singleton_method with Module#Prepend
+
+	* proc.c (rb_obj_singleton_method): search the method entry from
+	  the origin class, for fix prepended modules.  [Bug #14658]
+
+	From: Vasiliy Ermolovich <younash@gmail.com>
+
+	proc.c: fix segfault when no singleton class
+
+	* proc.c (rb_obj_singleton_method): bail out if the receiver does
+	  not have the singleton class without accessing the origin class
+	  not to segfault.  [Bug #14658]
+------------------------------------------------------------------------
+r65117 | usa | 2018-10-17 18:22:24 +0900 (Wed, 17 Oct 2018) | 12 lines
+
+merge revision(s) 62007,62024: [Backport #13069]
+
+	mkmf.rb: ignore linker warnings
+
+	* lib/mkmf.rb (try_ldflags): ignore linker warnings.  they cause
+	  unexpected failures on OpenBSD.  [ruby-core:78827] [Bug #13069]
+
+	mkmf.rb: werror on mswin
+
+	* lib/mkmf.rb (MakeMakefile#try_ldflags): enable warning checking
+	  on mswin, link.exe warns -l options but does not fail.
+	  [Bug #13069]
+------------------------------------------------------------------------
+r65116 | usa | 2018-10-17 18:10:26 +0900 (Wed, 17 Oct 2018) | 11 lines
+
+merge revision(s) 64745: [Backport #15118]
+
+	Use opt_{aref,aset} over opt_{aref,aset}_with
+
+	* compile.c (iseq_compile_each0): Use `opt_aref`/`opt_aset` over
+	  `opt_aref_with`/`opt_aset_with` when frozen_string_literal: true,
+	  not to resurrect the index string on non-Hash receiver.
+
+	[Fix GH-1957]
+
+	From: chopraanmol1 <chopraanmol1@gmail.com>
+------------------------------------------------------------------------
+r65115 | usa | 2018-10-17 17:40:36 +0900 (Wed, 17 Oct 2018) | 22 lines
+
+merge revision(s) 63711,64398: [Backport #14841]
+
+	thread_sync.c (rb_mutex_lock): fix deadlock
+
+	* thread_sync.c (rb_mutex_lock): fix deadlock
+	  [ruby-core:87467] [Bug #14841]
+
+	thread_sync.c (rb_mutex_lock): acquire lock before being killed
+
+	We (the thread acquiring the mutex) need to acquire the mutex
+	before being killed to work with ConditionVariable#wait.
+
+	Thus we reinstate the acquire-immediately-after-sleeping logic
+	from pre-r63711 while still retaining the
+	acquire-after-checking-for-interrupts logic from r63711.
+
+	This regression was introduced in
+	commit 501069b8a4013f2e3fdde35c50e9527ef0061963 (r63711)
+	("thread_sync.c (rb_mutex_lock): fix deadlock") for
+	[Bug #14841]
+
+	[ruby-core:88503] [Bug #14999] [Bug #14841]
+------------------------------------------------------------------------
+r65114 | usa | 2018-10-17 17:30:28 +0900 (Wed, 17 Oct 2018) | 2 lines
+
+revert r65112, because of fearing an imcompatibility
+
+------------------------------------------------------------------------
+r65113 | usa | 2018-10-17 17:27:39 +0900 (Wed, 17 Oct 2018) | 5 lines
+
+merge revision(s) 64900: [Backport #15190]
+
+	Just a shebang is valid code
+
+	[ruby-core:89240] [Bug #15190]
+------------------------------------------------------------------------
+r65112 | usa | 2018-10-17 17:18:44 +0900 (Wed, 17 Oct 2018) | 8 lines
+
+merge revision(s) 60018: [Backport #13931]
+
+	configure.in: install_name without teeny
+
+	* configure.in (RUBY_API_VERSION): remove teeny from install_name
+	  to allow link extension libraries for the same minor version.
+	  patched by kimuraw (Wataru Kimura) at [ruby-dev:50262].
+	  [Bug #13931]
+------------------------------------------------------------------------
+r65111 | usa | 2018-10-17 17:15:47 +0900 (Wed, 17 Oct 2018) | 7 lines
+
+merge revision(s) 64915: [Backport #15205]
+
+	check argument type.
+
+	* iseq.c (iseqw_s_compile): check argument type (T_STRING) to
+	  avoid SEGV.
+
+------------------------------------------------------------------------
+r65110 | usa | 2018-10-17 17:11:45 +0900 (Wed, 17 Oct 2018) | 6 lines
+
+merge revision(s) 64913: [Backport #15223]
+
+	Support ubasecrt.dll 10.0.17763.1 included in Windows 10 October 2018 Update
+
+
+
+------------------------------------------------------------------------
+r65109 | usa | 2018-10-17 16:56:26 +0900 (Wed, 17 Oct 2018) | 3 lines
+
+merge revision(s) 61323: [Backport #15069]
+
+	suppress warning: 'const' attribute on function returning 'void'
+------------------------------------------------------------------------
+r64649 | usa | 2018-09-06 18:24:18 +0900 (Thu, 06 Sep 2018) | 3 lines
+
+re-patched r50599 because of test failure on TravisCI.
+[Backport #14060]
+
+------------------------------------------------------------------------
+r64564 | usa | 2018-08-27 23:18:59 +0900 (Mon, 27 Aug 2018) | 7 lines
+
+merge revision(s) 64092: [Backport #14942]
+
+	win32.c: limit write size on console
+
+	* win32/win32.c (constat_parse): split long buffer and limit write
+	  size on a console, as well as rb_w32_write.
+	  [ruby-dev:50597] [Bug #14942]
+------------------------------------------------------------------------
+r64563 | usa | 2018-08-27 23:15:43 +0900 (Mon, 27 Aug 2018) | 6 lines
+
+merge revision(s) 64071: [Backport #14941]
+
+	ruby.c: taint ARGV on Windows
+
+	* ruby.c (external_str_new_cstr): strings come from the external
+	  should be tainted.  [ruby-dev:50596] [Bug #14941]
+------------------------------------------------------------------------
+r64562 | usa | 2018-08-27 23:11:19 +0900 (Mon, 27 Aug 2018) | 8 lines
+
+merge revision(s) 64014: [Backport #14926]
+
+	fix sum on infinity
+
+	* array.c (rb_ary_sum): consider non-finite floats.
+	  [ruby-core:88024] [Bug #14926]
+
+	* enum.c (sum_iter): ditto.
+------------------------------------------------------------------------
+r64561 | usa | 2018-08-27 23:08:56 +0900 (Mon, 27 Aug 2018) | 21 lines
+
+merge revision(s) 64007,64019,64020: [Backport #14929]
+
+	thread.c (do_select): fix leak on exception
+
+	When do_select is interrupted and raise happens from
+	RUBY_VM_CHECK_INTS_BLOCKING, the original FD sets we copied
+	do not get freed, leading to a memory leak.  Wrap up all the
+	FD sets into a Ruby object to ensure the GC can release an
+	allocations made for rb_fdset_t.
+
+	This leak existed since Ruby 2.0.0 (r36430)
+
+	[Bug #14929]
+
+	increase timeout seconds.
+	* test/ruby/test_io.rb (test_select_leak): increase timeout seconds
+	  to pass this test on a high-load machine.
+
+
+	60 sec is not enough at all
+
+------------------------------------------------------------------------
+r64560 | usa | 2018-08-27 22:59:09 +0900 (Mon, 27 Aug 2018) | 6 lines
+
+merge revision(s) 63994: [Backport #14920]
+
+	reduce tzset
+
+	* time.c (rb_localtime_r): call tzset() only after TZ environment
+	  variable is changed.
+------------------------------------------------------------------------
+r64559 | usa | 2018-08-27 22:48:53 +0900 (Mon, 27 Aug 2018) | 7 lines
+
+merge revision(s) 63696: [Backport #14853]
+
+	variable.c: fix receiver on private constant
+
+	* variable.c (rb_const_search): fix NameError :receiver attribute
+	  on private constant, should raise with the included module, not
+	  the ICLASS.
+------------------------------------------------------------------------
+r64558 | usa | 2018-08-27 22:47:40 +0900 (Mon, 27 Aug 2018) | 27 lines
+
+merge revision(s) 62731,62735: [Backport #14495]
+
+	Bug Fix Enumerator::Lazy#uniq state for multiple call
+
+	* enumerator.c (lazy_uniq_i): create new hash for each calls.
+	  [Fix GH-1820]
+
+	Currently
+
+		2.5.0-preview1 :001 > arr = (0..100).lazy.uniq{|i| i % 10}
+		 => #<Enumerator::Lazy: #<Enumerator::Lazy: 0..100>:uniq>
+		2.5.0-preview1 :002 > arr.to_a
+		 => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+		2.5.0-preview1 :003 > arr.to_a
+		 => []
+
+	Expected
+
+	arr.to_a to always return same output
+
+	From: Anmol Chopra <anmolchopra@rocketbox.in>
+
+	test_enumerator.rb: duplicate assertions
+
+	* test/ruby/test_enumerator.rb (test_uniq): remove assertions
+	  which ared duplicate of lazy enumerator tests in
+	  test_lazy_enumerator.rb.
+------------------------------------------------------------------------
+r64149 | usa | 2018-07-31 23:21:59 +0900 (Tue, 31 Jul 2018) | 6 lines
+
+merge revision(s) 60011:
+
+	test_gc.rb: relax criterion
+
+	* test/ruby/test_gc.rb (TestGc#test_expand_heap): relax the
+	  criterion and compare by epsilon.
+------------------------------------------------------------------------
+r64148 | usa | 2018-07-31 23:12:08 +0900 (Tue, 31 Jul 2018) | 12 lines
+
+merge revision(s) 63512,63514: [Backport #14790]
+
+	time.rb: fix parsing time zone in iso8601
+
+	* lib/time.rb (Time.xmlschema): a colon in time zone designator
+	  can be omitted.  [ruby-core:87277] [Bug #14790]
+
+	time.rb: fix parsing time zone in iso8601
+
+	* lib/time.rb (Time.xmlschema): the minute in time zone designator
+	  can be omitted together with the preceding colon.
+	  [ruby-core:87277] [Bug #14790]
+------------------------------------------------------------------------
+r64147 | usa | 2018-07-31 23:01:54 +0900 (Tue, 31 Jul 2018) | 6 lines
+
+merge revision(s) 63417: [Backport #14756]
+
+	error.c: check redefined backtrace result
+
+	* error.c (rb_get_backtrace): check the result of `backtrace` even
+	  if the method is redefined.  [ruby-core:87013] [Bug #14756]
+------------------------------------------------------------------------
+r64146 | usa | 2018-07-31 22:54:40 +0900 (Tue, 31 Jul 2018) | 2 lines
+
+backport openssl v2.0.8 [Backport #14754]
+
+------------------------------------------------------------------------
+r64130 | usa | 2018-07-30 23:15:00 +0900 (Mon, 30 Jul 2018) | 9 lines
+
+merge revision(s) 63741: [Backport #14868]
+
+	process.c (ruby_fork_ruby): fix race in signal handling
+
+	We must block signals before stopping timer-thread, otherwise
+	signal handing may be delayed until (and if) another signal
+	is received after timer-thread is restarted.
+
+	[ruby-core:87622] [Bug #14868] [Bug #13916]
+------------------------------------------------------------------------
+r64129 | usa | 2018-07-30 23:11:50 +0900 (Mon, 30 Jul 2018) | 8 lines
+
+merge revision(s) 63727: [Backport #14865]
+
+	vm.c: fix infinite loop
+
+	* vm.c: use EXEC_EVENT_HOOK_AND_POP_FRAME. While exception handling, if an exception
+	  is raised in hooks, need to pop current frame and raise this raised exception by hook.
+
+	[ruby-dev:50582] [Bug #14865]
+------------------------------------------------------------------------
+r64128 | usa | 2018-07-30 23:06:52 +0900 (Mon, 30 Jul 2018) | 15 lines
+
+merge revision(s) 63698: [Backport #14856]
+
+	lib/drb/extservm.rb (service): do not return `false'
+
+	invoke_service_command may set entries in @servers to `false',
+	making it incompatible with the intended use of the
+	safe navigation operator.
+
+	This caused occasional DRb test failures, but they were hidden
+	with automatic retry.
+
+	[ruby-core:87524] [Bug #14856]
+
+	Fixes: r53111 ("use safe navigation operator")
+		commit 059c9c1cf371e049c7481c78b76e9620da52757f [GH-1142]
+------------------------------------------------------------------------
+r64127 | usa | 2018-07-30 23:00:13 +0900 (Mon, 30 Jul 2018) | 9 lines
+
+merge revision(s) 63112: [Backport #14818]
+
+	Remove outdated example from Numeric documentation
+
+	Since 2.5, Numeric instances can be cloned and duplicated.
+
+	[Fix GH-1850]
+
+	From: Miguel Landaeta <miguel@miguel.cc>
+------------------------------------------------------------------------
+r64126 | usa | 2018-07-30 22:57:35 +0900 (Mon, 30 Jul 2018) | 24 lines
+
+merge revision(s) 63571,63572: [Backport #14816]
+
+	`int isnan(double)` is a POSIXism
+
+	- `isnan` is something relatively new.  We need to provide one for
+	  those systems without it.  However:
+	- X/Open defines `int isnan(double)`. Note the `int`.
+	- C99 defines `isnan(x)` to be a macro.
+	- C++11 nukes them all, undefines all the "masking macro"s, and
+	  defines its own `bool isnan(double)`.  Note the `bool`.
+	- In C++, `int isnan(double)` and `bool isnan(double)` are
+	  incompatible.
+	- So the mess.
+
+	[Bug #14816][ruby-core:87364]
+	further reading: https://developers.redhat.com/blog/2016/02/29/why-cstdlib-is-more-complicated-than-you-might-think/
+
+
+	include/ruby/missing.h: defined(__cplusplus) before using __cplusplus
+
+	* include/ruby/missing.h (isinf, isnan): For non-C++ programs,
+	  defined(__cplusplus) may be needed before using __cplusplus.
+	  [Bug #14816]
+
+------------------------------------------------------------------------
+r64125 | usa | 2018-07-30 22:54:27 +0900 (Mon, 30 Jul 2018) | 21 lines
+
+merge revision(s) 63549,63551,63554: [Backport #14805]
+
+	memo->u3.cnt is long not int [Bug #14805]
+
+	enum.c: mitigate overflows
+
+	* enum.c (enum_count): convert counters to Integer as unsigned
+	  long, instead of long, to mitigate overflows.
+	  [ruby-core:87348] [Bug #14805]
+
+	* enum.c (ary_inject_op): ditto.
+
+	* enum.c (each_with_index_i): ditto, instead of int.
+
+	* enum.c (find_index_i, find_index_iter_i): ditto, instead of
+	  unsigned int.
+
+	enum.c: bignum counter
+
+	* enum.c (imemo_count_up, imemo_count_value): promote the counter
+	  value to a bignum on overflow.  [Bug #14805]
+------------------------------------------------------------------------
+r63809 | usa | 2018-06-30 22:24:21 +0900 (Sat, 30 Jun 2018) | 5 lines
+
+Fix path checks for case insensitive filesystem
+
+see https://github.com/rubygems/rubygems/pull/2211
+[ruby-core:86745] [Backport #14721]
+
+------------------------------------------------------------------------
+r63808 | usa | 2018-06-30 22:08:51 +0900 (Sat, 30 Jun 2018) | 19 lines
+
+merge revision(s) 63054,63055,63056: [Backport #14655]
+
+	test_time_tz.rb: Kiritimati tzdata fix
+
+	* test/ruby/test_time_tz.rb (TestTimeTZ#test_pacific_kiritimati):
+	  fix the expected data at the skip of New Year's Eve 1994.
+	  [Bug #14655]
+
+	test_time_tz.rb: Kiritimati tzdata fix
+
+	* test/ruby/test_time_tz.rb (gen_zdump_test): fix the expected
+	  data at the Kiritimati's skip of New Year's Eve 1994.
+	  [Bug #14655]
+
+	test_time_tz.rb: Lisbon tzdata fix
+
+	* test/ruby/test_time_tz.rb (gen_variational_zdump_test): Update
+	  Lisbon zdump data, which fixed the 1912-01-01 transition for
+	  Portugual and its colonies.  [Bug #14655]
+------------------------------------------------------------------------
+r63807 | usa | 2018-06-30 22:06:35 +0900 (Sat, 30 Jun 2018) | 13 lines
+
+merge revision(s) 60596,60599: [Backport #14060]
+
+	file.c: infect from arguments
+
+	* file.c (rb_check_realpath_internal): infetct the result with
+	  arguments, no taint if none are tainted and cwd is not used.
+	  [ruby-core:83583] [Bug #14060]
+
+	file.c: infect from arguments
+
+	* file.c (rb_check_realpath_internal): infetct the result with
+	  arguments, no taint if none are tainted and cwd is not used.
+	  [ruby-core:83583] [Bug #14060]
+------------------------------------------------------------------------
+r63806 | usa | 2018-06-30 22:00:09 +0900 (Sat, 30 Jun 2018) | 7 lines
+
+merge revision(s) 62952: [Backport #14638]
+
+	win32/file.c: relative path with drive letter
+
+	* win32/file.c (IS_ABSOLUTE_PATH_P): home directory should not be
+	  a relative path regardless a drive letter.   PathIsRelativeW
+	  returns FALSE on such path.  [ruby-core:86356] [Bug #14638]
+------------------------------------------------------------------------
+r63805 | usa | 2018-06-30 21:56:17 +0900 (Sat, 30 Jun 2018) | 37 lines
+
+merge revision(s) 62396: [Backport #14357]
+
+	st.c: retry operations if rebuilt
+
+	Calling the .eql? and .hash methods during a Hash operation can
+	result in a thread switch or a signal handler to run: allowing
+	one execution context to rebuild the hash table while another is
+	still reading or writing the table.  This results in a
+	use-after-free bug affecting the thread_safe-0.3.6 test suite
+	and likely other bugs.
+
+	This bug did not affect users of commonly keys (String, Symbol,
+	Fixnum) as those are optimized to avoid method dispatch
+	for .eql? and .hash methods.
+
+	A separate version of this change needs to be ported to Ruby 2.3.x
+	which had a different implementation of st.c but was affected
+	by the same bug.
+
+	* st.c: Add comment about table rebuilding during comparison.
+	  (DO_PTR_EQUAL_CHECK): New macro.
+	  (REBUILT_TABLE_ENTRY_IND, REBUILT_TABLE_BIN_IND): New macros.
+	  (find_entry, find_table_entry_ind, find_table_bin_ind): Use new
+	  macros.  Return the rebuild flag.
+	  (find_table_bin_ptr_and_reserve): Ditto.
+	  (st_lookup, st_get_key, st_insert, st_insert2): Retry the
+	  operation if the table was rebuilt.
+	  (st_general_delete, st_shift, st_update, st_general_foreach):
+	  Ditto.
+	  (st_rehash_linear, st_rehash_indexed): Use DO_PTR_EQUAL_CHECK.
+	  Return the rebuild flag.
+	  (st_rehash): Retry the operation if the table was rebuilt.
+	  [ruby-core:85510] [Ruby trunk Bug#14357]
+
+	Thanks to Vit Ondruch for reporting the bug.
+
+	From: Vladimir Makarov <vmakarov@redhat.com>
+------------------------------------------------------------------------
+r63804 | usa | 2018-06-30 21:34:19 +0900 (Sat, 30 Jun 2018) | 10 lines
+
+merge revision(s) 62513: [Backport #12762]
+
+	Update url with 404 status on LEGAL file.
+
+	  * Update redirected and upstream url.
+	  * Added the Wayback Machine url for missing link.
+
+	  [Bug #12762][ruby-dev:49802]
+
+	From: SHIBATA Hiroshi <hsbt@ruby-lang.org>
+------------------------------------------------------------------------
+r63691 | usa | 2018-06-18 23:11:34 +0900 (Mon, 18 Jun 2018) | 2 lines
+
+Forgotten to update RUBY_PATCHLEVEL
+
+------------------------------------------------------------------------
+r63690 | svn | 2018-06-18 22:50:01 +0900 (Mon, 18 Jun 2018) | 1 line
+
+* 2018-06-18
+------------------------------------------------------------------------
+r63689 | usa | 2018-06-18 22:50:00 +0900 (Mon, 18 Jun 2018) | 6 lines
+
+Fixed tempfile leaks
+
+* lib/rubygems.rb (Gem::VERSION): 2.6.14.2
+
+* lib/rubygems/ext/ext_conf_builder.rb: merge from 2.7.7.
+
+------------------------------------------------------------------------
+r63626 | usa | 2018-06-10 17:59:17 +0900 (Sun, 10 Jun 2018) | 6 lines
+
+merge revision(s) 58455:
+
+	use $(srcdir).
+
+	* win32/Makefile.sub (enc/jis/props.h): build it in not builddir,
+	  but in srcdir.
+------------------------------------------------------------------------
+r63036 | nagachika | 2018-03-29 21:15:11 +0900 (Thu, 29 Mar 2018) | 1 line
+
+bump up teeny version to 2.4.5.
 ------------------------------------------------------------------------
 r63012 | nagachika | 2018-03-28 22:54:58 +0900 (Wed, 28 Mar 2018) | 80 lines
 
