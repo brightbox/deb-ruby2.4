@@ -1,4 +1,4 @@
-ruby2.4 (2.4.5-1bbox2~xenial1) xenial; urgency=medium
+ruby2.4 (2.4.5-1bbox4~bionic1) bionic; urgency=medium
 
   * New upstream release, 2.4.5.
   * Fix baseruby detection for building on bionic
