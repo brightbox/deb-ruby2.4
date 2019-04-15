@@ -1,3 +1,10 @@
+ruby2.4 (2.4.6-1bbox1~bionic1) bionic; urgency=medium
+
+  * New upstream release, 2.4.6
+  * Fixes multiple rubygems security bugs, CVE-2019-8320 through 8325
+
+ -- John Leach <john@brightbox.co.uk>  Mon, 15 Apr 2019 16:40:05 +0100
+
 ruby2.4 (2.4.5-1bbox4~bionic1) bionic; urgency=medium
 
   * New upstream release, 2.4.5.
